@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Services from "./pages/Services";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   return (
@@ -43,6 +44,10 @@ function App() {
           element={<Navbar />}
         />
         <Route path="/hero" element={<Hero />} />
+        <Route
+  path="/reset-password"
+  element={<ResetPassword />}
+/>
       </Routes>
     </BrowserRouter>
   );

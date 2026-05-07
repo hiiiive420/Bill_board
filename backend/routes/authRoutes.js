@@ -1,5 +1,5 @@
 import express from "express";
-import { sendOtp, verifyOtpAndRegister } from "../controllers/authController.js";
+import { sendOtp, verifyOtpAndRegister ,sendResetOtp,resetPassword} from "../controllers/authController.js";
 import { body } from "express-validator";
 
 const router = express.Router();
@@ -23,5 +23,7 @@ router.post(
   verifyOtpAndRegister
 );
 
+router.post("/send-reset-otp", sendResetOtp);
 
+router.post("/reset-password", resetPassword);
 export default router;

@@ -78,7 +78,15 @@ const Login = () => {
               placeholder="Enter password"
             />
           </label>
-
+<div className="mt-3 flex justify-end">
+  <button
+    type="button"
+    onClick={() => navigate("/reset-password")}
+    className="text-sm font-semibold text-[#2092D1] hover:underline"
+  >
+    Forgot Password?
+  </button>
+</div>
           <button
             type="submit"
             disabled={loading}
