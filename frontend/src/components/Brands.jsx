@@ -2,7 +2,7 @@ import { useState } from "react";
 import brandImage from "../assets/log01.jpeg";
 import brandLogo1 from "../assets/log02.jpeg";
 import brandLogo2 from "../assets/log014.jpeg";
-import brandLogo3 from "../assets/log04.png";
+import brandLogo3 from "../assets/Log04.png";
 import brandLogo4 from "../assets/log05.jpeg";
 import brandLogo6 from "../assets/log06.png";
 import brandLogo7 from "../assets/log07.png";
