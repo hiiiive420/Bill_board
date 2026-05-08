@@ -82,7 +82,7 @@ export default function Contact() {
               <div className="relative mt-6 rounded-[18px] bg-white p-5 text-[#184074]">
                 <p className="text-lg font-black">Prefer direct contact?</p>
                 <div className="mt-4 grid gap-2 text-sm font-bold text-[#52677d]">
-                  <p>Email: Signartsadds@gmail.com</p>
+                  <p>Email: signartsadds@gmail.com</p>
                   <p>Phone: +94 77 578 8907</p>
                   <p>Location: Colombo, Sri Lanka</p>
                 </div>

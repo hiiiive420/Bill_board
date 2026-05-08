@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://signart.lk/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://signart.lk/#billboards</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://signart.lk/about</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://signart.lk/services</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://signart.lk/services/media-formats</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://signart.lk/services/audience-reach</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://signart.lk/services/creative-support</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://signart.lk/services/campaign-activation</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://signart.lk/services/case-studies</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://signart.lk/contact</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://signart.lk/contact#campaign-inquiry</loc>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

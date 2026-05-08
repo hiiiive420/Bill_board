@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import API from "../api/axios";
+import BillboardCard from "./BillboardCard";
 
 export default function AllBillboards() {
   const [billboards, setBillboards] = useState([]);
@@ -30,12 +31,13 @@ export default function AllBillboards() {
     const q = search.toLowerCase().replace(/\s+/g, "");
     const name = b.name?.toLowerCase().replace(/\s+/g, "") || "";
     const location = (b.location || b.address || "").toLowerCase().replace(/\s+/g, "");
+    const description = (b.description || "").toLowerCase().replace(/\s+/g, "");
     const size =
       b.width && b.height
         ? `${b.width}x${b.height}`
         : (b.size || "").toLowerCase().replace(/\s+/g, "");
 
-    return !q || name.includes(q) || location.includes(q) || size.includes(q);
+    return !q || name.includes(q) || location.includes(q) || description.includes(q) || size.includes(q);
   });
 
   const normalizedSearch = search.trim().toLowerCase();
@@ -139,56 +141,5 @@ export default function AllBillboards() {
         <p className="mt-12 text-center text-base text-gray-400">No billboards found for "{search}"</p>
       )}
     </section>
-  );
-}
-
-function BillboardCard({ item }) {
-  const [hovered, setHovered] = useState(false);
-  const title = item.location || item.address || item.name || "Premium Billboard";
-  const size = item.width && item.height ? `${item.width}ft x ${item.height}ft` : item.size;
-  const priceLabel = item.price || "Check Price";
-  const whatsappText = encodeURIComponent(
-    `Hi, I would like to check the price for this billboard.\n\nLocation: ${title}\nSize: ${
-      size || "Not specified"
-    }\nAddress: ${item.address || item.location || "Not specified"}`
-  );
-
-  return (
-    <article className="w-full max-w-[320px]">
-      <div
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        className="relative aspect-square w-full cursor-pointer overflow-hidden rounded-[clamp(36px,12vw,53px)] bg-[#D9D9D9] transition-transform duration-300 hover:scale-[1.03]"
-      >
-        {item.image && <img src={item.image} alt={title} className="h-full w-full object-cover" />}
-
-        <div
-          className="absolute inset-x-0 bottom-0 flex min-h-[45%] flex-col justify-end bg-gradient-to-t from-black/85 via-black/55 to-transparent px-4 pb-4 pt-16 text-white transition duration-300"
-          style={{
-            background: hovered
-              ? "linear-gradient(to top, rgba(0,0,0,.92), rgba(0,0,0,.66), rgba(0,0,0,0))"
-              : undefined,
-          }}
-        >
-          <p className="m-0 max-w-full text-[clamp(1rem,4vw,1.18rem)] font-black leading-tight">
-            {title}
-          </p>
-          {size && <p className="mt-1 text-sm font-bold leading-tight opacity-95">{size}</p>}
-          <p className="mt-1 line-clamp-2 text-xs font-semibold leading-snug opacity-85">
-            {item.address || item.location}
-          </p>
-          <a
-            href={`https://wa.me/94775788907?text=${whatsappText}`}
-            target="_blank"
-            rel="noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="mt-3 w-fit rounded-full bg-[#2092D1] px-5 py-2 text-xs font-bold text-white shadow-[0_6px_14px_rgba(32,146,209,.28)] transition hover:-translate-y-0.5 hover:bg-[#184074]"
-            aria-label={`Check price for ${title} on WhatsApp`}
-          >
-            {priceLabel}
-          </a>
-        </div>
-      </div>
-    </article>
   );
 }

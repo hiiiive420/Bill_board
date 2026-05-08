@@ -19,7 +19,7 @@ app.use(helmet());
 app.use(express.json());
 
 app.use(cors({
-  origin: ["http://localhost:5173", "https://api.signart.lk"],
+  origin: ["https://signart.lk","https://www.signart.lk","http://localhost:5173"],
   credentials: true
 }));
 

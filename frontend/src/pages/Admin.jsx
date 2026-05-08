@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api/axios";
 
 const emptyForm = {
   location: "",
+  description: "",
   width: "",
   height: "",
   isAvailable: true,
@@ -24,6 +25,7 @@ const Admin = () => {
   const [pageLoading, setPageLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const previewObjectUrl = useRef("");
   const navigate = useNavigate();
 
   const stats = useMemo(
@@ -48,18 +50,55 @@ const Admin = () => {
   };
 
   useEffect(() => {
-    loadBillboards();
+    let active = true;
+
+    API.get("/billboards")
+      .then((res) => {
+        if (active) setBillboards(res.data);
+      })
+      .catch((err) => {
+        if (active) setError(err.response?.data?.msg || "Unable to load billboards");
+      })
+      .finally(() => {
+        if (active) setPageLoading(false);
+      });
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   useEffect(() => {
-    if (!image) return undefined;
+    return () => {
+      if (previewObjectUrl.current) URL.revokeObjectURL(previewObjectUrl.current);
+    };
+  }, []);
 
-    const objectUrl = URL.createObjectURL(image);
-    setPreview(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [image]);
+  const revokePreviewObjectUrl = () => {
+    if (!previewObjectUrl.current) return;
+    URL.revokeObjectURL(previewObjectUrl.current);
+    previewObjectUrl.current = "";
+  };
+
+  const updateImage = (file) => {
+    revokePreviewObjectUrl();
+    setImage(file);
+
+    if (file) {
+      const objectUrl = URL.createObjectURL(file);
+      previewObjectUrl.current = objectUrl;
+      setPreview(objectUrl);
+      return;
+    }
+
+    const currentImage = editingId
+      ? billboards.find((billboard) => billboard._id === editingId)?.image || ""
+      : "";
+    setPreview(currentImage);
+  };
 
   const resetForm = () => {
+    revokePreviewObjectUrl();
     setForm(emptyForm);
     setImage(null);
     setPreview("");
@@ -92,6 +131,7 @@ const Admin = () => {
       const formData = new FormData();
       if (image) formData.append("image", image);
       formData.append("location", form.location);
+      formData.append("description", form.description);
       formData.append("width", form.width);
       formData.append("height", form.height);
       formData.append("isAvailable", form.isAvailable ? "true" : "false");
@@ -122,11 +162,13 @@ const Admin = () => {
   };
 
   const startEdit = (billboard) => {
+    revokePreviewObjectUrl();
     setEditingId(billboard._id);
     setImage(null);
     setPreview(billboard.image);
     setForm({
       location: billboard.location || "",
+      description: billboard.description || "",
       width: billboard.width || "",
       height: billboard.height || "",
       isAvailable: Boolean(billboard.isAvailable),
@@ -205,7 +247,7 @@ const Admin = () => {
                   {editingId ? "Edit Billboard" : "Create Billboard"}
                 </h2>
                 <p className="mt-1 text-sm font-semibold text-[#6B7280]">
-                  Keep dimensions, visibility, and featured status current.
+                  Keep dimensions, descriptions, visibility, and featured status current.
                 </p>
               </div>
               {editingId && (
@@ -238,7 +280,7 @@ const Admin = () => {
                 type="file"
                 accept="image/*"
                 required={!editingId}
-                onChange={(e) => setImage(e.target.files?.[0] || null)}
+                onChange={(e) => updateImage(e.target.files?.[0] || null)}
                 className="mt-2 block w-full text-sm font-semibold text-[#52606C] file:mr-4 file:rounded-full file:border-0 file:bg-[#2092D1] file:px-4 file:py-2 file:text-sm file:font-black file:text-white"
               />
             </label>
@@ -259,6 +301,22 @@ const Admin = () => {
                 className="mt-2 h-11 w-full rounded-md border border-[#B0CADF] bg-[#EDF4F9] px-3 text-sm font-semibold text-[#184074] outline-none focus:border-[#2092D1] focus:bg-white"
                 placeholder="Colombo 03"
               />
+            </label>
+
+            <label className="mt-4 block">
+              <span className="text-sm font-bold text-[#184074]">Description</span>
+              <textarea
+                required
+                maxLength="240"
+                rows="4"
+                value={form.description}
+                onChange={(e) => setForm({ ...form, description: e.target.value })}
+                className="mt-2 w-full resize-none rounded-md border border-[#B0CADF] bg-[#EDF4F9] px-3 py-3 text-sm font-semibold text-[#184074] outline-none focus:border-[#2092D1] focus:bg-white"
+                placeholder="Short note about visibility, nearby area, or campaign fit"
+              />
+              <span className="mt-1 block text-xs font-semibold text-[#6B7280]">
+                {form.description.length}/240 characters
+              </span>
             </label>
 
             <div className="mt-4 grid grid-cols-2 gap-3">
@@ -362,6 +420,11 @@ const Admin = () => {
                       <p className="mt-1 text-sm font-bold text-[#52606C]">
                         {billboard.width}ft x {billboard.height}ft
                       </p>
+                      {billboard.description && (
+                        <p className="mt-2 line-clamp-2 text-sm font-semibold leading-snug text-[#6B7280]">
+                          {billboard.description}
+                        </p>
+                      )}
 
                       <div className="mt-3 flex flex-wrap gap-2">
                         <span

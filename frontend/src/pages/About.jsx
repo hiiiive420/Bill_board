@@ -2,9 +2,11 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CountUpValue from "../components/CountUpValue";
 import { Link } from "react-router-dom";
-import ad1 from "../assets/ad1.jpg";
-import ad2 from "../assets/ad2.jpg";
-import ad3 from "../assets/ad3.jpg";
+import ad1 from "../assets/Streetlevel attention.png";
+import ad2 from "../assets/champaignintelligence.png";
+import ad3 from "../assets/launchreadydesign.png";
+import ad4 from "../assets/ad1.jpg";
+import ad5 from "../assets/ad2.jpg";
 
 const stats = [
   { value: "24/7", label: "Visibility", delay: "0ms" },
@@ -97,7 +99,7 @@ export default function About() {
                   </div>
 
                   <div className="absolute left-6 top-20 w-[46%] rotate-[-5deg] overflow-hidden rounded-[8px] border-[6px] border-white bg-[#D9D9D9] shadow-[0_18px_35px_rgba(24,64,116,.2)]">
-                    <img src={ad1} alt="Campaign panel" className="h-[150px] w-full object-cover sm:h-[190px]" />
+                    <img src={ad4} alt="Campaign panel" className="h-[150px] w-full object-cover sm:h-[190px]" />
                     <div className="bg-[#184074] px-4 py-3 text-white">
                       <p className="text-xl font-black leading-none">City Launch</p>
                       <p className="mt-1 text-xs font-bold text-white/70">Colombo / Digital</p>
@@ -105,7 +107,7 @@ export default function About() {
                   </div>
 
                   <div className="absolute right-5 top-24 w-[43%] rotate-[5deg] overflow-hidden rounded-[8px] border-[6px] border-white bg-[#D9D9D9] shadow-[0_18px_35px_rgba(24,64,116,.18)]">
-                    <img src={ad2} alt="Audience panel" className="h-[135px] w-full object-cover sm:h-[175px]" />
+                    <img src={ad5} alt="Audience panel" className="h-[135px] w-full object-cover sm:h-[175px]" />
                     <div className="bg-[#2092D1] px-4 py-3 text-white">
                       <p className="text-xl font-black leading-none">High Recall</p>
                       <p className="mt-1 text-xs font-bold text-white/75">Peak-hour visibility</p>

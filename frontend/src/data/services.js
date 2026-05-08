@@ -1,6 +1,8 @@
-import ad1 from "../assets/ad1.jpg";
-import ad2 from "../assets/ad2.jpg";
-import ad3 from "../assets/ad3.jpg";
+import ad1 from "../assets/Mediaformat.png";
+import ad2 from "../assets/Audiance Reach.png";
+import ad3 from "../assets/creativesupport.png";
+import ad4 from "../assets/Champaign activation.png";
+import ad5 from "../assets/Casestudy.png";
 
 export const services = {
   "media-formats": {
@@ -51,7 +53,7 @@ export const services = {
     headline: "Move from campaign idea to live placement.",
     description:
       "From availability checks to launch coordination, we keep the campaign process smooth so your outdoor message reaches the street without confusion.",
-    image: ad1,
+    image: ad4,
     metrics: [
       ["Plan", "Location check"],
       ["Book", "Space confirmation"],
@@ -65,7 +67,7 @@ export const services = {
     headline: "Use proven outdoor ideas to plan better campaigns.",
     description:
       "OOH influences online and offline behavior. We help turn campaign examples into practical insights for store visits, app downloads, events, and brand recall.",
-    image: ad2,
+    image: ad5,
     metrics: [
       ["100+", "Study ideas"],
       ["OOH", "Behavior influence"],

@@ -14,13 +14,15 @@ const toBoolean = (value) => value === true || value === "true";
 
 export const createBillboard = async (req, res) => {
   try {
-    const { location, width, height, isInDemand, isAvailable } = req.body;
+    const { location, description, width, height, isInDemand, isAvailable } = req.body;
+    const cleanLocation = location?.trim();
+    const cleanDescription = description?.trim();
 
     if (!req.file) {
       return res.status(400).json({ msg: "Image required" });
     }
 
-    if (!location || !width || !height) {
+    if (!cleanLocation || !cleanDescription || !width || !height) {
       return res.status(400).json({ msg: "All fields required" });
     }
 
@@ -28,7 +30,8 @@ export const createBillboard = async (req, res) => {
 
     const billboard = await Billboard.create({
       image: result.secure_url,
-      location: location.trim(),
+      location: cleanLocation,
+      description: cleanDescription,
       width: Number(width),
       height: Number(height),
       isAvailable: isAvailable === undefined ? true : toBoolean(isAvailable),
@@ -44,10 +47,11 @@ export const createBillboard = async (req, res) => {
 
 export const updateBillboard = async (req, res) => {
   try {
-    const { location, width, height, isInDemand, isAvailable } = req.body;
+    const { location, description, width, height, isInDemand, isAvailable } = req.body;
     const updates = {};
 
     if (location !== undefined) updates.location = location.trim();
+    if (description !== undefined) updates.description = description.trim();
     if (width !== undefined) updates.width = Number(width);
     if (height !== undefined) updates.height = Number(height);
     if (isInDemand !== undefined) updates.isInDemand = toBoolean(isInDemand);
