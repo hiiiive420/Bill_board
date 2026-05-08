@@ -84,9 +84,14 @@ export default function FooterSection() {
             Design and Developed by
           </p>
 
-          <p className="m-0 text-[clamp(1rem,1.9vw,1.625rem)] font-black leading-none text-white">
+          <a
+              href="https://hiiiive.lk/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="m-0 text-[clamp(1rem,1.9vw,1.625rem)] font-black leading-none text-white transition-opacity duration-300 hover:opacity-80"
+                >
             HIIIIVE
-          </p>
+          </a>
         </div>
       </div>
 
