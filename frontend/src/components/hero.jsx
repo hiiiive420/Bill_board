@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import heroImg from "../assets/billboard.png";
+import heroImg from "../assets/billboard.webp";
 
-import ad1 from "../assets/ad1.jpg";
-import ad2 from "../assets/ad2.jpg";
-import ad3 from "../assets/ad3.jpg";
+import ad1 from "../assets/ad1.webp";
+import ad2 from "../assets/ad2.webp";
+import ad3 from "../assets/ad3.webp";
 
 const ads = [ad1, ad2, ad3];
 

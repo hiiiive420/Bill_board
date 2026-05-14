@@ -2,14 +2,20 @@ import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CountUpValue from "../components/CountUpValue";
+import AllBillboards from "../components/AllBillboards";
 import { services } from "../data/services";
 
-const serviceEntries = Object.entries(services);
+const serviceEntries = [
+  ["billboards", services.billboards],
+  ["media-formats", services["media-formats"]],
+  ["campaign-activation", services["campaign-activation"]],
+];
 
 export default function Services() {
   const { slug } = useParams();
-  const activeSlug = services[slug] ? slug : "case-studies";
+  const activeSlug = serviceEntries.some(([itemSlug]) => itemSlug === slug) ? slug : "billboards";
   const active = services[activeSlug];
+  const isBillboards = activeSlug === "billboards";
 
   return (
     <div className="min-h-screen overflow-hidden bg-white text-[#184074]">
@@ -69,73 +75,79 @@ export default function Services() {
           </div>
         </section>
 
-        <section className="px-4 py-14 sm:py-18">
-          <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[.92fr_1.08fr] lg:items-start">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[7px] text-[#2092D1]">Insight</p>
-              <h2 className="mt-4 text-[clamp(2.3rem,6vw,4.4rem)] font-black leading-none">
-                {active.headline}
-              </h2>
-              <p className="mt-6 max-w-[620px] text-base font-semibold leading-8 text-[#52677d]">
-                {active.description}
-              </p>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-              {active.metrics.map(([value, label], index) => (
-                <article
-                  key={label}
-                  className="service-card rounded-[8px] border border-[#C9E4F3] bg-white p-6 shadow-[0_16px_34px_rgba(24,64,116,.08)]"
-                  style={{ animationDelay: `${index * 120}ms` }}
-                >
-                  <p className="text-[clamp(1.9rem,5vw,3rem)] font-black leading-none text-[#2092D1]">
-                    <CountUpValue value={value} />
+        {isBillboards ? (
+          <AllBillboards />
+        ) : (
+          <>
+            <section className="px-4 py-14 sm:py-18">
+              <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[.92fr_1.08fr] lg:items-start">
+                <div>
+                  <p className="text-sm font-black uppercase tracking-[7px] text-[#2092D1]">Insight</p>
+                  <h2 className="mt-4 text-[clamp(2.3rem,6vw,4.4rem)] font-black leading-none">
+                    {active.headline}
+                  </h2>
+                  <p className="mt-6 max-w-[620px] text-base font-semibold leading-8 text-[#52677d]">
+                    {active.description}
                   </p>
-                  <p className="mt-2 text-sm font-black text-[#184074]">{label}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-[#184074] px-4 py-16 text-white sm:py-20">
-          <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[.7fr_1.3fr] lg:items-center">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[7px] text-[#7ec8f7]">What You Get</p>
-              <h2 className="mt-4 text-[clamp(2rem,5vw,3.4rem)] font-black leading-none">
-                A service flow that keeps campaigns clear.
-              </h2>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-3">
-              {active.bullets.map((item, index) => (
-                <div key={item} className="service-card rounded-[8px] bg-white/10 p-5 ring-1 ring-white/15" style={{ animationDelay: `${index * 140}ms` }}>
-                  <p className="text-sm font-black text-[#7ec8f7]">0{index + 1}</p>
-                  <p className="mt-3 text-lg font-black leading-6">{item}</p>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
-        <section className="px-4 py-16 sm:py-20">
-          <div className="mx-auto max-w-[1180px] overflow-hidden rounded-[32px] bg-[#F4FAFE] p-6 sm:p-10">
-            <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
-              <div>
-                <p className="text-sm font-black uppercase tracking-[7px] text-[#2092D1]">Ready</p>
-                <h2 className="mt-3 text-[clamp(2rem,5vw,3.6rem)] font-black leading-none">
-                  Need this service for your next campaign?
-                </h2>
+                <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+                  {active.metrics.map(([value, label], index) => (
+                    <article
+                      key={label}
+                      className="service-card rounded-[8px] border border-[#C9E4F3] bg-white p-6 shadow-[0_16px_34px_rgba(24,64,116,.08)]"
+                      style={{ animationDelay: `${index * 120}ms` }}
+                    >
+                      <p className="text-[clamp(1.9rem,5vw,3rem)] font-black leading-none text-[#2092D1]">
+                        <CountUpValue value={value} />
+                      </p>
+                      <p className="mt-2 text-sm font-black text-[#184074]">{label}</p>
+                    </article>
+                  ))}
+                </div>
               </div>
-              <Link
-                to="/contact#campaign-inquiry"
-                className="w-fit rounded-full bg-gradient-to-r from-[#D63D91] to-[#FF8A13] px-8 py-4 text-sm font-black text-white shadow-[0_12px_26px_rgba(226,88,71,.2)] transition hover:-translate-y-0.5"
-              >
-                Send Campaign Inquiry
-              </Link>
-            </div>
-          </div>
-        </section>
+            </section>
+
+            <section className="bg-[#184074] px-4 py-16 text-white sm:py-20">
+              <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[.7fr_1.3fr] lg:items-center">
+                <div>
+                  <p className="text-sm font-black uppercase tracking-[7px] text-[#7ec8f7]">What You Get</p>
+                  <h2 className="mt-4 text-[clamp(2rem,5vw,3.4rem)] font-black leading-none">
+                    A service flow that keeps campaigns clear.
+                  </h2>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-3">
+                  {active.bullets.map((item, index) => (
+                    <div key={item} className="service-card rounded-[8px] bg-white/10 p-5 ring-1 ring-white/15" style={{ animationDelay: `${index * 140}ms` }}>
+                      <p className="text-sm font-black text-[#7ec8f7]">0{index + 1}</p>
+                      <p className="mt-3 text-lg font-black leading-6">{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="px-4 py-16 sm:py-20">
+              <div className="mx-auto max-w-[1180px] overflow-hidden rounded-[32px] bg-[#F4FAFE] p-6 sm:p-10">
+                <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+                  <div>
+                    <p className="text-sm font-black uppercase tracking-[7px] text-[#2092D1]">Ready</p>
+                    <h2 className="mt-3 text-[clamp(2rem,5vw,3.6rem)] font-black leading-none">
+                      Need this service for your next campaign?
+                    </h2>
+                  </div>
+                  <Link
+                    to="/contact#campaign-inquiry"
+                    className="w-fit rounded-full bg-gradient-to-r from-[#184074] via-[#1f78b6] to-[#2092D1] px-8 py-4 text-sm font-black text-white shadow-[0_12px_26px_rgba(32,146,209,.22)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_32px_rgba(24,64,116,.24)]"
+                  >
+                    Send Campaign Inquiry
+                  </Link>
+                </div>
+              </div>
+            </section>
+          </>
+        )}
       </main>
 
       <Footer />

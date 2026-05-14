@@ -98,6 +98,20 @@ export default function InDemand() {
   const total = billboards.length;
   const itemsToShow = Math.min(visibleCount, total);
   const maxCurrent = Math.max(total - itemsToShow, 0);
+
+  useEffect(() => {
+    if (maxCurrent <= 0) return undefined;
+
+    const timer = window.setInterval(() => {
+      setCurrent((c) => {
+        const normalized = Math.min(c, maxCurrent);
+        return normalized >= maxCurrent ? 0 : normalized + 1;
+      });
+    }, 3500);
+
+    return () => window.clearInterval(timer);
+  }, [maxCurrent]);
+
   const activeCurrent = Math.min(current, maxCurrent);
   const isFirst = activeCurrent === 0;
   const isLast = activeCurrent >= maxCurrent;
@@ -137,7 +151,7 @@ export default function InDemand() {
   return (
     <section className="flex select-none flex-col items-center bg-white px-4 py-14 sm:py-16">
       <h2 className="mb-10 text-center text-[clamp(1.75rem,5vw,2.25rem)] font-black leading-none text-[#184074] sm:mb-14">
-        In - <span className="text-[#2092D1]">DEMAND</span>
+        IN <span className="text-[#2092D1]">DEMAND</span>
       </h2>
 
       <div className="relative w-full max-w-[1180px]">
@@ -225,9 +239,7 @@ function InDemandCard({ item, onClick, isMuted }) {
         transform: `scale(${isMuted ? 0.93 : 1})`,
         opacity: isMuted ? 0.82 : 1,
         cursor: isInteractive ? "pointer" : "default",
-        boxShadow: isMuted
-          ? "0 4px 16px rgba(0,0,0,0.07)"
-          : "0 8px 32px rgba(0,0,0,0.13)",
+        boxShadow: "none",
       }}
       aria-label={isInteractive ? "Change featured billboard" : title}
     >

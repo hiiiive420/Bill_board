@@ -2,7 +2,7 @@ const reasons = ["High Recall Rate", "24/7 Visibility", "High Local Reach"];
 
 export default function WhyBillboard() {
   return (
-    <section className="overflow-hidden bg-white px-4 py-10 font-sans sm:py-14 lg:py-16">
+    <section className="overflow-hidden bg-white px-4 pb-12 pt-3 font-sans sm:py-14 lg:py-16">
       <div className="relative mx-auto hidden h-[310px] w-full max-w-[1000px] overflow-visible md:block lg:h-[330px]">
         <div className="absolute left-1/2 top-1/2 h-[330px] w-[1000px] origin-center -translate-x-1/2 -translate-y-1/2 scale-[.78] lg:scale-[.9] xl:scale-100">
           <div className="absolute left-[20px] top-[112px]">
@@ -36,19 +36,31 @@ export default function WhyBillboard() {
         </div>
       </div>
 
-      <div className="mx-auto grid max-w-[430px] gap-8 text-center md:hidden">
-        <div>
-          <h2 className="m-0 text-[clamp(4.6rem,23vw,6.25rem)] font-black leading-[.8] text-[#184074]">
+      <div className="relative mx-auto h-[150px] w-full max-w-[430px] overflow-visible md:hidden">
+        <div className="absolute left-[2%] top-1/2 -translate-y-1/2">
+          <h2 className="m-0 text-[clamp(2.7rem,14vw,3.7rem)] font-black leading-[.8] text-[#184074]">
             WHY
           </h2>
-          <p className="mt-4 text-[clamp(1rem,4vw,1.45rem)] font-black leading-none tracking-[clamp(9px,3vw,15px)] text-[#2092D1]">
+          <p className="mt-2 text-[clamp(.65rem,3vw,.9rem)] font-black leading-none tracking-[clamp(6px,2.4vw,10px)] text-[#2092D1]">
             BILLBOARD
           </p>
         </div>
 
-        <div className="grid gap-4">
+        <svg
+          className="pointer-events-none absolute left-[39%] top-1/2 h-[86px] w-[25%] -translate-y-1/2"
+          viewBox="0 0 132 92"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path d="M0 48 L60 34" stroke="#111111" strokeWidth="1.2" />
+          <path d="M60 34 L128 8" stroke="#111111" strokeWidth="1.2" />
+          <path d="M60 34 C66 49 91 54 126 48" stroke="#111111" strokeWidth="1.2" />
+          <path d="M60 34 C70 68 96 83 130 82" stroke="#111111" strokeWidth="1.2" />
+        </svg>
+
+        <div className="absolute right-[1%] top-1/2 grid -translate-y-1/2 gap-5 text-left">
           {reasons.map((reason) => (
-            <p key={reason} className="m-0 text-[clamp(1.35rem,6.4vw,1.85rem)] font-black leading-none text-[#184074]">
+            <p key={reason} className="m-0 text-[clamp(.82rem,3.7vw,1.1rem)] font-black leading-none text-[#184074]">
               {reason}
             </p>
           ))}

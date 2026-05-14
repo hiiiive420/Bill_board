@@ -1,8 +1,32 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import API from "../api/axios";
 import BillboardCard from "./BillboardCard";
 
-export default function AllBillboards() {
+const billboardFaqs = [
+  {
+    question: "How do I check billboard availability?",
+    answer:
+      "Choose a billboard from the grid and send the inquiry through WhatsApp. Our team will confirm availability, pricing, and booking details for that location.",
+  },
+  {
+    question: "Can I book more than one billboard for a campaign?",
+    answer:
+      "Yes. You can shortlist multiple locations and share them with us so we can help plan coverage, campaign duration, and the best placement mix.",
+  },
+  {
+    question: "Do you help with billboard artwork sizes?",
+    answer:
+      "Yes. Once the selected billboard size is confirmed, we can guide the artwork dimensions and help prepare campaign-ready creative.",
+  },
+  {
+    question: "How long should a billboard campaign run?",
+    answer:
+      "Most outdoor campaigns work best with repeated exposure over several weeks. The ideal duration depends on your campaign goal, area, and budget.",
+  },
+];
+
+export default function AllBillboards({ preview = false }) {
   const [billboards, setBillboards] = useState([]);
   const [search, setSearch] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -51,6 +75,8 @@ export default function AllBillboards() {
   ).slice(0, 6);
 
   const shouldShowSuggestions = showSuggestions && normalizedSearch && suggestions.length > 0;
+  const visibleBillboards = preview ? filtered.slice(0, 6) : filtered;
+  const shouldShowViewMore = preview && filtered.length > 3;
 
   const selectSuggestion = (value) => {
     setSearch(value);
@@ -132,13 +158,49 @@ export default function AllBillboards() {
       </div>
 
       <div className="grid w-full max-w-[1120px] grid-cols-[repeat(auto-fit,minmax(min(100%,250px),320px))] justify-center gap-7 sm:gap-10">
-        {filtered.map((item) => (
-          <BillboardCard key={item._id} item={item} />
+        {visibleBillboards.map((item, index) => (
+          <BillboardCard
+            key={item._id}
+            item={item}
+            className={preview && index >= 3 ? "hidden sm:block" : ""}
+          />
         ))}
       </div>
 
       {filtered.length === 0 && (
         <p className="mt-12 text-center text-base text-gray-400">No billboards found for "{search}"</p>
+      )}
+
+      {shouldShowViewMore && (
+        <Link
+          to="/services/billboards#billboards"
+          className="mt-10 rounded-full bg-gradient-to-r from-[#184074] via-[#1f78b6] to-[#2092D1] px-8 py-3 text-sm font-black text-white shadow-[0_10px_22px_rgba(32,146,209,.22)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_28px_rgba(24,64,116,.24)]"
+        >
+          View More
+        </Link>
+      )}
+
+      {!preview && (
+        <div className="mt-16 w-full max-w-[1120px] rounded-[8px] bg-[#F4FAFE] px-5 py-8 sm:px-8 sm:py-10">
+          <div className="mx-auto max-w-[760px] text-center">
+            <p className="text-sm font-black uppercase tracking-[7px] text-[#2092D1]">FAQ</p>
+            <h3 className="mt-3 text-[clamp(1.7rem,4vw,2.5rem)] font-black leading-none text-[#184074]">
+              Billboard Booking Questions
+            </h3>
+          </div>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {billboardFaqs.map((item) => (
+              <article
+                key={item.question}
+                className="rounded-[8px] border border-[#C9E4F3] bg-white p-5 shadow-[0_14px_30px_rgba(24,64,116,.07)]"
+              >
+                <h4 className="text-base font-black leading-6 text-[#184074]">{item.question}</h4>
+                <p className="mt-3 text-sm font-semibold leading-7 text-[#52677d]">{item.answer}</p>
+              </article>
+            ))}
+          </div>
+        </div>
       )}
     </section>
   );

@@ -2,11 +2,11 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CountUpValue from "../components/CountUpValue";
 import { Link } from "react-router-dom";
-import ad1 from "../assets/Streetlevel attention.png";
-import ad2 from "../assets/champaignintelligence.png";
-import ad3 from "../assets/launchreadydesign.png";
-import ad4 from "../assets/ad1.jpg";
-import ad5 from "../assets/ad2.jpg";
+import ad1 from "../assets/Streetlevel attention.webp";
+import ad2 from "../assets/champaignintelligence.webp";
+import ad3 from "../assets/launchreadydesign.webp";
+import ad4 from "../assets/ad1.webp";
+import ad5 from "../assets/ad2.webp";
 
 const stats = [
   { value: "24/7", label: "Visibility", delay: "0ms" },
@@ -30,6 +30,19 @@ const values = [
 ];
 
 const steps = ["Discover", "Design", "Display", "Measure"];
+
+const missionVision = [
+  {
+    label: "Mission",
+    title: "Make outdoor advertising simple, visible, and campaign-ready.",
+    text: "We help brands find the right billboard locations, prepare clear creative, and launch outdoor campaigns with confidence.",
+  },
+  {
+    label: "Vision",
+    title: "Become Sri Lanka's most trusted outdoor media partner.",
+    text: "We want every brand, from local businesses to national campaigns, to access high-impact outdoor visibility with better planning and clearer service.",
+  },
+];
 
 const moments = [
   {
@@ -183,6 +196,27 @@ export default function About() {
                 </p>
                 <p className="mt-2 text-base font-black text-[#184074]">{stat.label}</p>
               </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="px-4 py-16 sm:py-20">
+          <div className="mx-auto grid max-w-[1180px] gap-5 md:grid-cols-2">
+            {missionVision.map((item) => (
+              <article
+                key={item.label}
+                className="rounded-[18px] border border-[#C9E4F3] bg-[#F4FAFE] p-6 shadow-[0_16px_36px_rgba(24,64,116,.08)] sm:p-8"
+              >
+                <p className="text-sm font-black uppercase tracking-[7px] text-[#2092D1]">
+                  {item.label}
+                </p>
+                <h2 className="mt-4 text-[clamp(1.8rem,4vw,2.7rem)] font-black leading-none text-[#184074]">
+                  {item.title}
+                </h2>
+                <p className="mt-5 text-base font-semibold leading-8 text-[#52677d]">
+                  {item.text}
+                </p>
+              </article>
             ))}
           </div>
         </section>

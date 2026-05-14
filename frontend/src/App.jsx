@@ -10,6 +10,10 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Services from "./pages/Services";
 import ResetPassword from "./pages/ResetPassword";
+import NotFound from "./pages/NotFound";
+import ErrorPage from "./pages/ErrorPage";
+import Policy from "./pages/Policy";
+import Terms from "./pages/Terms";
 
 function App() {
   return (
@@ -39,6 +43,9 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/services" element={<Services />} />
         <Route path="/services/:slug" element={<Services />} />
+        <Route path="/error" element={<ErrorPage />} />
+        <Route path="/policy" element={<Policy />} />
+        <Route path="/terms-and-conditions" element={<Terms />} />
  <Route
           path="/navbar"
           element={<Navbar />}
@@ -48,6 +55,7 @@ function App() {
   path="/reset-password"
   element={<ResetPassword />}
 />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

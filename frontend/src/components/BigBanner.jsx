@@ -1,10 +1,10 @@
-import banner from "../assets/image.png";
+import banner from "../assets/image.webp";
 
 export default function BigBanner() {
   return (
-    <section className="py-16 bg-white flex justify-center">
+    <section className="flex justify-center overflow-hidden bg-white pb-3 pt-8 sm:py-16">
 
-      <div className="max-w-[1200px] w-full px-6">
+      <div className="w-full max-w-[1200px] px-2 sm:px-6">
 
         <div className="relative rounded-2xl overflow-hidden">
 
@@ -12,7 +12,7 @@ export default function BigBanner() {
           <img
             src={banner}
             alt="Big Billboard"
-            className="w-full object-contain"
+            className="w-full scale-[1.08] object-contain sm:scale-100"
           />
 
           {/* OPTIONAL OVERLAY TEXT (if you want dynamic instead of image text) */}

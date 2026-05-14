@@ -1,10 +1,24 @@
-import ad1 from "../assets/Mediaformat.png";
-import ad2 from "../assets/Audiance Reach.png";
-import ad3 from "../assets/creativesupport.png";
-import ad4 from "../assets/Champaign activation.png";
-import ad5 from "../assets/Casestudy.png";
+import ad1 from "../assets/Mediaformat.webp";
+import ad2 from "../assets/Audiance Reach.webp";
+import ad3 from "../assets/creativesupport.webp";
+import ad4 from "../assets/Champaign activation.webp";
+import ad5 from "../assets/Casestudy.webp";
 
 export const services = {
+  billboards: {
+    label: "All Billboards",
+    title: "Browse Available Billboards",
+    headline: "Find the billboard locations ready for your next campaign.",
+    description:
+      "Search our available billboard placements by location, name, description, or size, then ask for pricing directly from the listing.",
+    image: ad1,
+    metrics: [
+      ["Search", "Find by location"],
+      ["Direct", "WhatsApp inquiries"],
+      ["Ready", "Campaign locations"],
+    ],
+    bullets: ["Browse available billboard locations", "Filter by location, name, or size", "Ask for pricing directly"],
+  },
   "media-formats": {
     label: "Media Formats",
     title: "Flexible Media Formats",
@@ -80,4 +94,4 @@ export const services = {
 export const serviceTabs = Object.values(services).map((service) => service.label);
 
 export const getServiceSlug = (label) =>
-  Object.keys(services).find((slug) => services[slug].label === label) || "case-studies";
+  Object.keys(services).find((slug) => services[slug].label === label) || "billboards";

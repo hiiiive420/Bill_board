@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 const SocialIcon = ({ type }) => {
   const common = {
-    className: "h-5 w-5",
+    className: "h-6 w-6 sm:h-7 sm:w-7",
     fill: "currentColor",
     "aria-hidden": "true",
     viewBox: "0 0 24 24",
@@ -62,37 +62,27 @@ export default function FooterSection() {
 
   return (
     <footer className="relative overflow-hidden bg-white font-sans">
-      {/* TOP SECTION */}
-      <div className="flex min-h-[420px] flex-col items-center bg-[#2092D1]/30 px-6 pt-12 text-center sm:min-h-[560px] sm:pt-16 lg:min-h-[610px]">
-        <h2 className="mb-5 text-[clamp(2rem,7vw,5.125rem)] font-black leading-[1.05] text-[#184074]">
-          Ready To Be Seen?
-        </h2>
+      <div className="relative min-h-[680px] sm:min-h-[730px] lg:min-h-[900px]">
+        <div className="absolute inset-x-0 top-0 h-1/2 bg-[#2092D1]/30 lg:h-[58%]" />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[#205DAD] lg:h-[42%]" />
 
-        <button
-          type="button"
-          onClick={() => goTo("/#billboards")}
-          className="rounded-full bg-gradient-to-b from-[#2a5298] to-[#1a3a6e] px-8 py-3 text-[clamp(.9rem,1.5vw,1.25rem)] font-bold text-white shadow-[0_4px_18px_rgba(24,64,116,.38)] transition hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(24,64,116,.5)] sm:px-12"
-        >
-          Book a Billboard
-        </button>
-      </div>
+        <div className="absolute inset-x-0 top-4 z-20 flex flex-col items-center px-6 text-center sm:top-4 lg:top-8">
+          <h2 className="mb-4 text-[clamp(2rem,7vw,5.125rem)] font-black leading-[1.05] text-[#184074] lg:mb-5">
+            Ready To Be Seen?
+          </h2>
 
-      {/* BOTTOM SECTION */}
-      <div className="flex min-h-[360px] items-end justify-center bg-[#205DAD] px-6 pb-8 pt-52 sm:min-h-[390px] sm:pb-11 sm:pt-44 lg:min-h-[560px] lg:pb-10 lg:pt-[390px]">
-        <div className="text-center">
-          <p className="mb-1 text-[clamp(.85rem,1.7vw,1.5rem)] font-black leading-none text-white/80">
-            Design and Developed by
-          </p>
-
-          <p className="m-0 text-[clamp(1rem,1.9vw,1.625rem)] font-black leading-none text-white">
-            HIIIIVE
-          </p>
+          <button
+            type="button"
+            onClick={() => goTo("/#billboards")}
+            className="rounded-full bg-gradient-to-b from-[#2a5298] to-[#1a3a6e] px-8 py-3 text-[clamp(.9rem,1.5vw,1.25rem)] font-bold text-white shadow-[0_4px_18px_rgba(24,64,116,.38)] transition hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(24,64,116,.5)] sm:px-12"
+          >
+            Book a Billboard
+          </button>
         </div>
-      </div>
 
-      {/* MAIN CARD */}
-      <div className="pointer-events-none absolute inset-x-0 top-[31%] z-10 px-[clamp(16px,3.9vw,56px)] sm:top-[36%] lg:top-[35%]">
-        <div className="pointer-events-auto mx-auto flex min-h-[380px] max-w-[1328px] items-center justify-center overflow-hidden rounded-[42px] border-[6px] border-white bg-[#205DAD] px-5 py-7 text-center sm:h-[clamp(260px,40vw,590px)] sm:min-h-0 sm:rounded-[clamp(42px,12vw,174px)] sm:px-10 sm:py-8">
+        {/* MAIN CARD */}
+        <div className="pointer-events-none absolute inset-x-0 top-[51%] z-10 -translate-y-1/2 px-[clamp(14px,3.9vw,56px)] sm:top-[54%] lg:top-[58%]">
+          <div className="pointer-events-auto mx-auto flex min-h-[440px] max-w-[1328px] items-center justify-center overflow-hidden rounded-[46px] border-[6px] border-white bg-[#205DAD] px-5 py-7 text-center sm:h-[clamp(500px,40vw,590px)] sm:min-h-0 sm:rounded-[clamp(72px,12vw,174px)] sm:px-10 sm:py-8">
           <div className="flex w-full max-w-[820px] flex-col items-center">
             
             {/* LOGO */}
@@ -152,6 +142,22 @@ export default function FooterSection() {
               >
                 Call Us
               </a>
+
+              <button
+                type="button"
+                onClick={() => goTo("/policy")}
+                className="hover:text-[#9ED8F7]"
+              >
+                Policy
+              </button>
+
+              <button
+                type="button"
+                onClick={() => goTo("/terms-and-conditions")}
+                className="hover:text-[#9ED8F7]"
+              >
+                Terms
+              </button>
             </nav>
 
             {/* DESCRIPTION */}
@@ -174,7 +180,7 @@ export default function FooterSection() {
               {[
                 ["facebook", "https://www.facebook.com/Signartads/"],
                // ["x", "https://x.com/"],
-               //["instagram", "https://www.instagram.com/"],
+               ["instagram", "https://www.instagram.com/sign_arts_adds?igsh=OHg3bXI4Mjh3aXE="],
                // ["linkedin", "https://www.linkedin.com/"],
                 ["whatsapp", "https://api.whatsapp.com/send?phone=94775788907"],
               ].map(([type, href]) => (
@@ -183,14 +189,30 @@ export default function FooterSection() {
                   href={href}
                   target="_blank"
                   rel="noreferrer"
-                  className="grid h-9 w-9 place-items-center rounded-full bg-white/10 transition hover:-translate-y-0.5 hover:bg-white hover:text-[#205DAD] sm:h-12 sm:w-12"
+                  className="grid h-11 w-11 place-items-center rounded-full bg-white/10 transition hover:-translate-y-0.5 hover:bg-white hover:text-[#205DAD] sm:h-14 sm:w-14"
+                  aria-label={`Visit SignArt ${type}`}
                 >
                   <SocialIcon type={type} />
                 </a>
               ))}
             </div>
 
+            <p className="mt-5 text-sm font-bold text-white/75">
+              &copy; SignArt 2026. All rights reserved.
+            </p>
+
           </div>
+          </div>
+        </div>
+
+        <div className="absolute inset-x-0 bottom-1 z-20 px-6 text-center sm:bottom-4 lg:bottom-3">
+          <p className="mb-1 text-[clamp(.85rem,1.7vw,1.5rem)] font-black leading-none text-white/80">
+            Design and Developed by
+          </p>
+
+          <p className="m-0 text-[clamp(1rem,1.9vw,1.625rem)] font-black leading-none text-white">
+            HIIIIVE
+          </p>
         </div>
       </div>
     </footer>

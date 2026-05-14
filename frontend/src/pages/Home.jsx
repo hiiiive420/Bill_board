@@ -14,7 +14,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <InDemand />
-      <AllBillboards />
+      <AllBillboards preview />
       <WhatWeDo />
       <BigBanner />
       <WhyBillboard />
