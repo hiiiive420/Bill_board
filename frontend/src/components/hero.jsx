@@ -119,7 +119,7 @@ export default function Hero() {
           </h1>
         </div>
 
-        <div className="absolute bottom-[-8px] right-[-68px] w-[min(112vw,620px)] sm:right-[-24px] sm:w-[680px] lg:bottom-[0px] lg:right-[-80px] lg:w-[1030px] xl:bottom-[10px] xl:right-[-24px] xl:w-[890px]">
+        <div className="absolute bottom-[-8px] right-[-68px] w-[min(112vw,620px)] sm:right-[-24px] sm:w-[680px] lg:bottom-[0px] lg:right-[-80px] lg:w-[1030px] xl:bottom-[0px] xl:right-[0px] xl:w-[1098px]">
           <img
             src={heroImg}
             alt="Billboard"
@@ -137,18 +137,18 @@ export default function Hero() {
             </div>
           */}
           {/*
-            Previous desktop hero billboard ad screen preserved for future restore:
+            Previous desktop hero  ad screen preserved for future restore:
 
             <div className="absolute left-[13.5%] top-[15.5%] h-[33.5%] w-[72%] overflow-hidden rounded-[8px] bg-white shadow-[inset_0_0_0_2px_rgba(255,255,255,.3)]">
               <img
-                src={billboardAdImage}
-                alt="Featured billboard advertisement"
+                src={AdImage}
+                alt="Featured  advertisement"
                 className="h-full w-full object-cover"
               />
             </div>
           */}
           {/*
-            Previous billboard ad implementation preserved for future restore:
+            Previous  ad implementation preserved for future restore:
 
             <div
               className="absolute left-[12.2%] top-[23.2%] h-[39%] w-[72.5%] overflow-hidden bg-[#111827] shadow-[inset_0_0_0_2px_rgba(255,255,255,.16)]"
@@ -157,8 +157,8 @@ export default function Hero() {
               }}
             >
               <img
-                src={billboardAdImage}
-                alt="Featured billboard advertisement"
+                src={AdImage}
+                alt="Featured  advertisement"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -166,9 +166,9 @@ export default function Hero() {
           <div
             className="absolute overflow-hidden bg-[#111827] shadow-[inset_0_0_0_1px_rgba(255,255,255,.14)]"
             style={{
-              left: billboardAdTransform.left,
-              top: billboardAdTransform.top,
-              width: billboardAdTransform.width,
+              left: AdTransform.left,
+              top: AdTransform.top,
+              width: AdTransform.width,
               height: billboardAdTransform.height,
               clipPath: billboardAdTransform.clipPath,
               transform: `rotate(${billboardAdTransform.rotate}) skewX(${billboardAdTransform.skewX}) skewY(${billboardAdTransform.skewY})`,
