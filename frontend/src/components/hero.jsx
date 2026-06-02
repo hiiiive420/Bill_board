@@ -137,18 +137,18 @@ export default function Hero() {
             </div>
           */}
           {/*
-            Previous desktop hero  ad screen preserved for future restore:
+            Previous desktop hero billboard ad screen preserved for future restore:
 
             <div className="absolute left-[13.5%] top-[15.5%] h-[33.5%] w-[72%] overflow-hidden rounded-[8px] bg-white shadow-[inset_0_0_0_2px_rgba(255,255,255,.3)]">
               <img
-                src={AdImage}
-                alt="Featured  advertisement"
+                src={billboardAdImage}
+                alt="Featured billboard advertisement"
                 className="h-full w-full object-cover"
               />
             </div>
           */}
           {/*
-            Previous  ad implementation preserved for future restore:
+            Previous billboard ad implementation preserved for future restore:
 
             <div
               className="absolute left-[12.2%] top-[23.2%] h-[39%] w-[72.5%] overflow-hidden bg-[#111827] shadow-[inset_0_0_0_2px_rgba(255,255,255,.16)]"
@@ -157,8 +157,8 @@ export default function Hero() {
               }}
             >
               <img
-                src={AdImage}
-                alt="Featured  advertisement"
+                src={billboardAdImage}
+                alt="Featured billboard advertisement"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -166,9 +166,9 @@ export default function Hero() {
           <div
             className="absolute overflow-hidden bg-[#111827] shadow-[inset_0_0_0_1px_rgba(255,255,255,.14)]"
             style={{
-              left: AdTransform.left,
-              top: AdTransform.top,
-              width: AdTransform.width,
+              left: billboardAdTransform.left,
+              top: billboardAdTransform.top,
+              width: billboardAdTransform.width,
               height: billboardAdTransform.height,
               clipPath: billboardAdTransform.clipPath,
               transform: `rotate(${billboardAdTransform.rotate}) skewX(${billboardAdTransform.skewX}) skewY(${billboardAdTransform.skewY})`,
