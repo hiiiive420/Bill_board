@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import API from "../api/axios";
 import BillboardCard from "./BillboardCard";
+import BillboardDetailsModal from "./BillboardDetailsModal";
 
 const billboardFaqs = [
   {
@@ -30,6 +31,7 @@ export default function AllBillboards({ preview = false }) {
   const [billboards, setBillboards] = useState([]);
   const [search, setSearch] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedBillboard, setSelectedBillboard] = useState(null);
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -38,15 +40,7 @@ export default function AllBillboards({ preview = false }) {
         const res = await API.get("/billboards");
         setBillboards(res.data);
       } catch {
-        setBillboards(
-          Array.from({ length: 6 }, (_, i) => ({
-            _id: String(i),
-            image: "",
-            size: "12ft x 8ft",
-            address: "No.45, Galle Road, Colombo 03",
-            price: "Rs. 45,000/mo",
-          }))
-        );
+        setBillboards([]);
       }
     })();
   }, []);
@@ -163,6 +157,8 @@ export default function AllBillboards({ preview = false }) {
             key={item._id}
             item={item}
             className={preview && index >= 3 ? "hidden sm:block" : ""}
+            onClick={() => setSelectedBillboard(item)}
+            ariaLabel={`View details for ${item.location || item.address || item.name || "billboard"}`}
           />
         ))}
       </div>
@@ -202,6 +198,11 @@ export default function AllBillboards({ preview = false }) {
           </div>
         </div>
       )}
+
+      <BillboardDetailsModal
+        billboard={selectedBillboard}
+        onClose={() => setSelectedBillboard(null)}
+      />
     </section>
   );
 }

@@ -1,33 +1,138 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import heroImg from "../assets/Billboard.webp";
 import heroVideo from "../assets/extreme_hero.webm";
 
 // Replace these images to change the rotating billboard ad creatives.
 import billboardAdImage1 from "../assets/ad1.webp";
 import billboardAdImage2 from "../assets/ad2.webp";
-import billboardAdImage3 from "../assets/ad3.webp";
+import billboardAdImage3 from "../assets/ad4.webp";
 
 const getIsMobile = () =>
   typeof window !== "undefined" && window.matchMedia("(max-width: 639px)").matches;
 
 const billboardAds = [billboardAdImage1, billboardAdImage2, billboardAdImage3];
 
-// Fine-tune these values to align the ad container with the billboard screen.
-const billboardAdTransform = {
-  left: "15.5%",
-  top: "21.2%",
-  width: "73.9%",
-  height: "50%",
-  rotate: "26deg",
-  skewX: "21deg",
-  skewY: "-34deg",
-  transformOrigin: "center center",
-  clipPath: "polygon(14px 10%, 89% 6px, 100% 100%, 1% 93%)",
+// Fine-tune this wrapper if the whole distorted ad area needs moving/resizing.
+const billboardAdBox = {
+  left: "7%",
+  top: "7%",
+  width: "88%",
+  height: "77%",
 };
+
+// Fine-tune these values to align the ad container with the billboard screen.
+// These work like Photoshop distort corner handles:
+// topLeft moves the top-left corner, topRight moves the top-right corner,
+// bottomRight moves the bottom-right corner, bottomLeft moves the bottom-left corner.
+const billboardAdCorners = {
+  topLeft: { x: 15, y: 44 },
+  topRight: { x: 85, y: 2 },
+  bottomRight: { x: 90, y: 65 },
+  bottomLeft: { x: 11, y: 100 },
+};
+
+
+const solveLinearSystem = (matrix, values) => {
+  const size = values.length;
+  const rows = matrix.map((row, index) => [...row, values[index]]);
+
+  for (let column = 0; column < size; column += 1) {
+    let pivotRow = column;
+
+    for (let row = column + 1; row < size; row += 1) {
+      if (Math.abs(rows[row][column]) > Math.abs(rows[pivotRow][column])) {
+        pivotRow = row;
+      }
+    }
+
+    if (Math.abs(rows[pivotRow][column]) < 1e-10) {
+      return null;
+    }
+
+    [rows[column], rows[pivotRow]] = [rows[pivotRow], rows[column]];
+
+    const pivot = rows[column][column];
+    for (let col = column; col <= size; col += 1) {
+      rows[column][col] /= pivot;
+    }
+
+    for (let row = 0; row < size; row += 1) {
+      if (row === column) continue;
+
+      const factor = rows[row][column];
+      for (let col = column; col <= size; col += 1) {
+        rows[row][col] -= factor * rows[column][col];
+      }
+    }
+  }
+
+  return rows.map((row) => row[size]);
+};
+
+const cleanMatrixValue = (value) => {
+  if (!Number.isFinite(value)) return 0;
+  const rounded = Math.abs(value) < 1e-10 ? 0 : value;
+  return Number(rounded.toFixed(8));
+};
+
+const getDistortTransform = ({ width, height, corners }) => {
+  if (!width || !height) return "none";
+
+  const sourcePoints = [
+    { x: 0, y: 0 },
+    { x: width, y: 0 },
+    { x: width, y: height },
+    { x: 0, y: height },
+  ];
+
+  const targetPoints = [
+    { x: (corners.topLeft.x / 100) * width, y: (corners.topLeft.y / 100) * height },
+    { x: (corners.topRight.x / 100) * width, y: (corners.topRight.y / 100) * height },
+    { x: (corners.bottomRight.x / 100) * width, y: (corners.bottomRight.y / 100) * height },
+    { x: (corners.bottomLeft.x / 100) * width, y: (corners.bottomLeft.y / 100) * height },
+  ];
+
+  const matrix = [];
+  const values = [];
+
+  sourcePoints.forEach((source, index) => {
+    const target = targetPoints[index];
+    const { x, y } = source;
+    const { x: targetX, y: targetY } = target;
+
+    matrix.push([x, y, 1, 0, 0, 0, -x * targetX, -y * targetX]);
+    values.push(targetX);
+
+    matrix.push([0, 0, 0, x, y, 1, -x * targetY, -y * targetY]);
+    values.push(targetY);
+  });
+
+  const solved = solveLinearSystem(matrix, values);
+  if (!solved) return "none";
+
+  const [h11, h12, h13, h21, h22, h23, h31, h32] = solved.map(cleanMatrixValue);
+
+  return `matrix3d(${[
+    h11, h21, 0, h31,
+    h12, h22, 0, h32,
+    0, 0, 1, 0,
+    h13, h23, 0, 1,
+  ].join(",")})`;
+};
+
+const showBillboardAdDebug = false;
 
 export default function Hero() {
   const [isMobile, setIsMobile] = useState(getIsMobile);
   const [currentAdIndex, setCurrentAdIndex] = useState(0);
+  const billboardAdRef = useRef(null);
+  const [billboardAdSize, setBillboardAdSize] = useState({ width: 0, height: 0 });
+
+  const billboardAdDistortTransform = getDistortTransform({
+    width: billboardAdSize.width,
+    height: billboardAdSize.height,
+    corners: billboardAdCorners,
+  });
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 639px)");
@@ -38,6 +143,38 @@ export default function Hero() {
 
     return () => mediaQuery.removeEventListener("change", syncMobileState);
   }, []);
+
+
+  useEffect(() => {
+    if (isMobile || !billboardAdRef.current) return undefined;
+
+    const billboardAdElement = billboardAdRef.current;
+
+    const updateBillboardAdSize = () => {
+      const { width, height } = billboardAdElement.getBoundingClientRect();
+
+      setBillboardAdSize((previousSize) => {
+        const widthChanged = Math.abs(previousSize.width - width) > 0.5;
+        const heightChanged = Math.abs(previousSize.height - height) > 0.5;
+
+        if (!widthChanged && !heightChanged) return previousSize;
+        return { width, height };
+      });
+    };
+
+    updateBillboardAdSize();
+
+    const resizeObserver =
+      typeof ResizeObserver !== "undefined" ? new ResizeObserver(updateBillboardAdSize) : null;
+
+    resizeObserver?.observe(billboardAdElement);
+    window.addEventListener("resize", updateBillboardAdSize);
+
+    return () => {
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", updateBillboardAdSize);
+    };
+  }, [isMobile]);
 
   useEffect(() => {
     if (isMobile) return undefined;
@@ -119,7 +256,7 @@ export default function Hero() {
           </h1>
         </div>
 
-        <div className="absolute bottom-[-8px] right-[-68px] w-[min(112vw,620px)] sm:right-[-24px] sm:w-[680px] lg:bottom-[0px] lg:right-[-80px] lg:w-[1030px] xl:bottom-[0px] xl:right-[0px] xl:w-[1098px]">
+        <div className="absolute bottom-[-8px] right-[-68px] w-[min(112vw,620px)] sm:right-[-24px] sm:w-[680px] lg:bottom-[0px] lg:right-[-80px] lg:w-[1030px] xl:bottom-[0px] xl:right-[-130px] xl:w-[1100px]">
           <img
             src={heroImg}
             alt="Billboard"
@@ -148,40 +285,86 @@ export default function Hero() {
             </div>
           */}
           {/*
-            Previous billboard ad implementation preserved for future restore:
+            Previous skew/polygon billboard ad implementation preserved for future restore:
 
             <div
-              className="absolute left-[12.2%] top-[23.2%] h-[39%] w-[72.5%] overflow-hidden bg-[#111827] shadow-[inset_0_0_0_2px_rgba(255,255,255,.16)]"
+              className="absolute overflow-hidden bg-[#111827] shadow-[inset_0_0_0_1px_rgba(255,255,255,.14)]"
               style={{
-                clipPath: "polygon(0 30%, 96% 0, 100% 70%, 0% 100%)",
+                left: "15.5%",
+                top: "21.2%",
+                width: "73.9%",
+                height: "50%",
+                clipPath: "polygon(14px 10%, 89% 6px, 100% 100%, 1% 93%)",
+                transform: "rotate(26deg) skewX(21deg) skewY(-34deg)",
+                transformOrigin: "center center",
               }}
             >
               <img
-                src={billboardAdImage}
+                src={billboardAds[currentAdIndex]}
                 alt="Featured billboard advertisement"
                 className="h-full w-full object-cover"
               />
             </div>
           */}
           <div
-            className="absolute overflow-hidden bg-[#111827] shadow-[inset_0_0_0_1px_rgba(255,255,255,.14)]"
+            ref={billboardAdRef}
+            className="absolute"
             style={{
-              left: billboardAdTransform.left,
-              top: billboardAdTransform.top,
-              width: billboardAdTransform.width,
-              height: billboardAdTransform.height,
-              clipPath: billboardAdTransform.clipPath,
-              transform: `rotate(${billboardAdTransform.rotate}) skewX(${billboardAdTransform.skewX}) skewY(${billboardAdTransform.skewY})`,
-              transformOrigin: billboardAdTransform.transformOrigin,
+              left: billboardAdBox.left,
+              top: billboardAdBox.top,
+              width: billboardAdBox.width,
+              height: billboardAdBox.height,
+              pointerEvents: "none",
             }}
           >
             <img
               key={currentAdIndex}
               src={billboardAds[currentAdIndex]}
               alt="Featured billboard advertisement"
-              className="h-full w-full object-cover transition-opacity duration-500"
+              className="absolute left-0 top-0 h-full w-full object-cover shadow-[inset_0_0_0_1px_rgba(255,255,255,.14)]"
+              style={{
+                opacity: billboardAdSize.width && billboardAdSize.height ? 1 : 0,
+                transform: billboardAdDistortTransform,
+                transformOrigin: "0 0",
+                transformStyle: "preserve-3d",
+                backfaceVisibility: "hidden",
+                willChange: "transform",
+              }}
             />
           </div>
+
+          {showBillboardAdDebug && (
+            <div
+              className="pointer-events-none absolute"
+              style={{
+                left: billboardAdBox.left,
+                top: billboardAdBox.top,
+                width: billboardAdBox.width,
+                height: billboardAdBox.height,
+              }}
+              aria-hidden="true"
+            >
+              <svg className="absolute inset-0 h-full w-full overflow-visible">
+                <polygon
+                  points={`${billboardAdCorners.topLeft.x},${billboardAdCorners.topLeft.y} ${billboardAdCorners.topRight.x},${billboardAdCorners.topRight.y} ${billboardAdCorners.bottomRight.x},${billboardAdCorners.bottomRight.y} ${billboardAdCorners.bottomLeft.x},${billboardAdCorners.bottomLeft.y}`}
+                  fill="none"
+                  stroke="#38bdf8"
+                  strokeWidth="1.5"
+                  vectorEffect="non-scaling-stroke"
+                />
+              </svg>
+              {Object.entries(billboardAdCorners).map(([cornerName, corner]) => (
+                <span
+                  key={cornerName}
+                  className="absolute h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-300 shadow-[0_0_0_1px_rgba(15,23,42,.9)]"
+                  style={{
+                    left: `${corner.x}%`,
+                    top: `${corner.y}%`,
+                  }}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

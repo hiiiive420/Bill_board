@@ -1,5 +1,5 @@
 import { useState } from "react";
-import brandImage from "../assets/log01.webp";
+import brandImage from "../assets/log031.webp";
 import brandLogo1 from "../assets/log02.webp";
 import brandLogo2 from "../assets/log014.webp";
 import brandLogo3 from "../assets/Log04.webp";
@@ -8,7 +8,7 @@ import brandLogo6 from "../assets/log06.webp";
 import brandLogo7 from "../assets/log07.webp";
 import brandLogo8 from "../assets/log03.webp";
 import brandLogo9 from "../assets/log09.webp";
-import brandLogo10 from "../assets/log031.webp";
+import brandLogo10 from "../assets/log01.webp";
 import brandLogo11 from "../assets/log011.webp";
 import brandLogo12 from "../assets/log012.webp";
 import brandLogo13 from "../assets/log013.webp";

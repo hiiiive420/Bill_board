@@ -10,27 +10,37 @@ const initialForm = {
   company: "",
   campaignGoal: "Brand awareness",
   location: "",
-  budget: "Rs. 50,000 - 100,000",
-  timeline: "This month",
+  budget: "Rs. 1M",
+  timeline: "1 Year",
   message: "",
 };
 
 const goals = ["Brand awareness", "Product launch", "Store visits", "Event promotion", "Hiring campaign"];
-const budgets = ["Rs. 50,000 - 100,000", "Rs. 100,000 - 250,000", "Rs. 250,000+", "Need guidance"];
-const timelines = ["This month", "Next 2-3 months", "Planning ahead", "Urgent launch"];
+const budgets = ["Rs. 1M", "Rs. 2.5M", "Rs. 5M+"];
+const timelines = ["1 Year", "2 Years", "3 Years", "More than 3 Years"];
 
 const validateForm = (formData) => {
   const nextErrors = {};
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if (!formData.name.trim()) nextErrors.name = "Name is required.";
+  if (formData.name.trim().length < 2) nextErrors.name = "Name is required.";
   if (!formData.email.trim()) {
     nextErrors.email = "Email is required.";
   } else if (!emailPattern.test(formData.email.trim())) {
     nextErrors.email = "Enter a valid email address.";
   }
-  if (!formData.location.trim()) nextErrors.location = "Preferred location is required.";
-  if (!formData.message.trim()) nextErrors.message = "Tell us the campaign need.";
+  if (formData.phone.trim() && formData.phone.trim().length < 6) {
+    nextErrors.phone = "Phone number is too short.";
+  }
+  if (formData.company.trim().length > 80) {
+    nextErrors.company = "Company must be 80 characters or fewer.";
+  }
+  if (formData.location.trim().length < 2) {
+    nextErrors.location = "Preferred location is required.";
+  }
+  if (formData.message.trim().length < 10) {
+    nextErrors.message = "Tell us the campaign need in at least 10 characters.";
+  }
 
   return nextErrors;
 };
@@ -68,6 +78,18 @@ export default function Contact() {
       setForm(initialForm);
       setErrors({});
     } catch (error) {
+      const serverErrors = error.response?.data?.errors;
+
+      if (Array.isArray(serverErrors)) {
+        setErrors(
+          serverErrors.reduce((nextErrors, item) => {
+            const field = item.path || item.param;
+            if (field && !nextErrors[field]) nextErrors[field] = item.msg;
+            return nextErrors;
+          }, {})
+        );
+      }
+
       setStatus({
         type: "error",
         msg: error.response?.data?.msg || "Could not send your inquiry. Please try again.",
@@ -136,8 +158,8 @@ export default function Contact() {
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="Name" value={form.name} onChange={(value) => updateField("name", value)} error={errors.name} required />
                 <Field label="Email" type="email" value={form.email} onChange={(value) => updateField("email", value)} error={errors.email} required />
-                <Field label="Phone" value={form.phone} onChange={(value) => updateField("phone", value)} />
-                <Field label="Company" value={form.company} onChange={(value) => updateField("company", value)} />
+                <Field label="Phone" value={form.phone} onChange={(value) => updateField("phone", value)} error={errors.phone} />
+                <Field label="Company" value={form.company} onChange={(value) => updateField("company", value)} error={errors.company} />
               </div>
 
               <div className="mt-4 grid gap-4 sm:grid-cols-2">

@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 const terms = [
-  ["Campaign Requests", "Billboard availability, pricing, and campaign dates are confirmed after direct communication with the SignArt team."],
+  ["Campaign Requests", "Billboard availability, pricing, and campaign dates are confirmed after direct communication with the SignArt & ADDS team."],
   ["Creative Materials", "Clients are responsible for providing accurate campaign content. Artwork may need formatting to match selected billboard specifications."],
   ["Bookings", "A billboard placement is not reserved until availability, campaign duration, and payment terms are confirmed."],
   ["Website Use", "The content on this website is provided for general information and may be updated without prior notice."],

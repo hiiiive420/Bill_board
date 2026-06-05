@@ -1,3 +1,5 @@
+import { getCheckPriceHref } from "../utils/billboardCheckPrice";
+
 const getSizeLabel = (billboard) => {
   if (billboard.width && billboard.height) {
     return `${billboard.width}ft x ${billboard.height}ft`;
@@ -26,20 +28,7 @@ export default function BillboardCard({
   const description = getDescription(data);
   const priceLabel = data.price || "Check Price";
   const isInteractive = Boolean(onClick);
-  const messageLines = [
-    "Hi, I would like to check the price for this billboard.",
-    "",
-    `Location: ${title}`,
-    `Size: ${size || "Not specified"}`,
-  ];
-
-  if (description) {
-    messageLines.push(`Description: ${description}`);
-  }
-
-  const whatsappText = encodeURIComponent(
-    messageLines.join("\n")
-  );
+  const checkPriceHref = getCheckPriceHref(data);
 
   const handleKeyDown = (event) => {
     if (!isInteractive) return;
@@ -81,7 +70,7 @@ export default function BillboardCard({
             </p>
           )}
           <a
-            href={`https://wa.me/94775788907?text=${whatsappText}`}
+            href={checkPriceHref}
             target="_blank"
             rel="noreferrer"
             onClick={(event) => event.stopPropagation()}

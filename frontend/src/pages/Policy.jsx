@@ -5,7 +5,7 @@ const items = [
   ["Information We Collect", "We may collect contact details, campaign inquiry details, and communication information shared through forms, calls, WhatsApp, or email."],
   ["How We Use Information", "We use submitted details to respond to inquiries, prepare campaign recommendations, confirm billboard availability, and improve our service experience."],
   ["Data Sharing", "We do not sell personal information. Details may be shared only with trusted service partners when required to support a campaign request."],
-  ["Contact", "For privacy questions, contact SignArt through the contact page or the phone number listed on this website."],
+  ["Contact", "For privacy questions, contact SignArt & ADDS through the contact page or the phone number listed on this website."],
 ];
 
 export default function Policy() {

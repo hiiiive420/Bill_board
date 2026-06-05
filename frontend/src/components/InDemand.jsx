@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import API from "../api/axios";
+import BillboardDetailsModal from "./BillboardDetailsModal";
 
 const blobRadius = {
   borderTopLeftRadius: "50%",
@@ -63,6 +64,7 @@ export default function InDemand() {
   const [billboards, setBillboards] = useState([]);
   const [current, setCurrent] = useState(0);
   const [visibleCount, setVisibleCount] = useState(getVisibleCount);
+  const [selectedBillboard, setSelectedBillboard] = useState(null);
 
   const dragStartX = useRef(0);
   const dragDelta = useRef(0);
@@ -74,15 +76,7 @@ export default function InDemand() {
         const res = await API.get("/billboards/in-demand");
         setBillboards(res.data);
       } catch {
-        setBillboards(
-          Array.from({ length: 6 }, (_, i) => ({
-            _id: String(i),
-            image: "",
-            location: "Colombo 03",
-            width: 12,
-            height: 8,
-          }))
-        );
+        setBillboards([]);
       }
     })();
   }, []);
@@ -192,56 +186,56 @@ export default function InDemand() {
           {visibleItems.map((item, index) => {
             const isSideItem = visibleCount === 3 && index !== 1;
             const isTabletSideItem = visibleCount === 2 && index === 1;
-            const onClick =
-              index === 0 && activeCurrent > 0
-                ? prev
-                : index === itemsToShow - 1 && activeCurrent < maxCurrent
-                  ? next
-                  : null;
+            const onOpen = (ignoreDrag = false) => {
+              if (ignoreDrag || Math.abs(dragDelta.current) < 8) setSelectedBillboard(item);
+            };
 
             return (
               <InDemandCard
                 key={item?._id ?? `billboard-${activeCurrent + index}`}
                 item={item}
-                onClick={onClick}
+                onOpen={onOpen}
                 isMuted={isSideItem || isTabletSideItem}
               />
             );
           })}
         </div>
       </div>
+
+      <BillboardDetailsModal
+        billboard={selectedBillboard}
+        onClose={() => setSelectedBillboard(null)}
+      />
     </section>
   );
 }
 
-function InDemandCard({ item, onClick, isMuted }) {
+function InDemandCard({ item, onOpen, isMuted }) {
   const title = getTitle(item);
   const description = item.description?.trim() || "";
-  const isInteractive = Boolean(onClick);
 
   const handleKeyDown = (event) => {
-    if (!isInteractive) return;
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-      onClick();
+      onOpen(true);
     }
   };
 
   return (
     <article
-      role={isInteractive ? "button" : undefined}
-      tabIndex={isInteractive ? 0 : undefined}
-      onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onClick={(event) => onOpen(event.detail === 0)}
       onKeyDown={handleKeyDown}
       className="relative h-[clamp(230px,58vw,321px)] w-[clamp(230px,58vw,320px)] shrink-0 overflow-hidden bg-[#D9D9D9] transition duration-500 focus:outline-none focus:ring-4 focus:ring-[#2092D1]/20"
       style={{
         ...blobRadius,
         transform: `scale(${isMuted ? 0.93 : 1})`,
         opacity: isMuted ? 0.82 : 1,
-        cursor: isInteractive ? "pointer" : "default",
+        cursor: "pointer",
         boxShadow: "none",
       }}
-      aria-label={isInteractive ? "Change featured billboard" : title}
+      aria-label={`View details for ${title}`}
     >
       {item?.image && (
         <img
