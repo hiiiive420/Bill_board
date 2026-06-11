@@ -3,9 +3,9 @@ import heroImg from "../assets/Billboard.webp";
 import heroVideo from "../assets/extreme_hero.webm";
 
 // Replace these images to change the rotating billboard ad creatives.
-import billboardAdImage1 from "../assets/ad1.webp";
-import billboardAdImage2 from "../assets/ad2.webp";
-import billboardAdImage3 from "../assets/ad4.webp";
+import billboardAdImage1 from "../assets/Apiit.webp";
+import billboardAdImage2 from "../assets/premiumsofa.webp";
+import billboardAdImage3 from "../assets/star_gold_full_cream_milk.webp";
 
 const getIsMobile = () =>
   typeof window !== "undefined" && window.matchMedia("(max-width: 639px)").matches;
