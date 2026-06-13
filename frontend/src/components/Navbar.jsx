@@ -1,4 +1,4 @@
-import logoImg from "../assets/logo.webp";
+import brandMark from "../assets/a.webp";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -28,37 +28,60 @@ export default function SignArtHeader() {
   };
 
   return (
-    <header className="bg-white px-4 pb-5 pt-6 sm:pb-7 sm:pt-8">
-      <div className="mx-auto flex w-full max-w-[1324px] flex-col items-center gap-6">
-        <Link to="/" className="flex items-center justify-center gap-2" aria-label="Sign Art home">
-          <span
-  className="leading-none text-[#1a5ba8]"
-  style={{
-    fontFamily: "'Arial Rounded MT Bold', sans-serif",
-    fontSize: "clamp(2.25rem,8vw,4.8rem)",
-    fontWeight: 900,
-  }}
->
-  SIGN
-</span>
+    <header className="bg-white px-3 pb-5 pt-5 sm:px-4 sm:pb-7 sm:pt-8">
+      <div className="mx-auto flex w-full max-w-[1324px] flex-col items-center gap-4 sm:gap-6">
+        {/*
+          Previous header logo design:
+
+          <Link to="/" className="flex items-center justify-center gap-2" aria-label="Sign Art home">
+            <span
+              className="leading-none text-[#1a5ba8]"
+              style={{
+                fontFamily: "'Arial Rounded MT Bold', sans-serif",
+                fontSize: "clamp(2.25rem,8vw,4.8rem)",
+                fontWeight: 900,
+              }}
+            >
+              SIGN
+            </span>
+            <img
+              src={logoImg}
+              alt="Logo"
+              className="h-[clamp(38px,6vw,62px)] w-auto object-contain"
+            />
+            <span
+              className="leading-none text-[#1a5ba8]"
+              style={{
+                fontFamily: "'Arial Rounded MT Bold', sans-serif",
+                fontSize: "clamp(2.25rem,8vw,4.8rem)",
+                fontWeight: 900,
+              }}
+            >
+              RT
+            </span>
+          </Link>
+        */}
+
+        <Link
+          to="/"
+          className="flex w-full items-center justify-center whitespace-nowrap text-[#123f55]"
+          aria-label="SignArt Adds home"
+        >
+          <span className="font-['Arial_Rounded_MT_Bold'] text-[clamp(1.55rem,8.5vw,2.4rem)] leading-none tracking-[0.01em] sm:text-[clamp(2.6rem,6vw,4.6rem)] sm:tracking-[0.02em]">
+            SIGN
+          </span>
           <img
-            src={logoImg}
-            alt="Logo"
-            className="h-[clamp(38px,6vw,62px)] w-auto object-contain"
+            src={brandMark}
+            alt=""
+            className="mx-[clamp(1px,0.4vw,5px)] h-[clamp(1.5rem,8vw,2.25rem)] w-auto shrink-0 object-contain sm:h-[clamp(2.5rem,5.7vw,4.35rem)]"
+            aria-hidden="true"
           />
-          <span
-  className="leading-none text-[#1a5ba8]"
-  style={{
-    fontFamily: "'Arial Rounded MT Bold', sans-serif",
-    fontSize: "clamp(2.25rem,8vw,4.8rem)",
-    fontWeight: 900,
-  }}
->
-  RT
-</span>
+          <span className="font-['Arial_Rounded_MT_Bold'] text-[clamp(1.55rem,8.5vw,2.4rem)] leading-none tracking-[0.01em] sm:text-[clamp(2.6rem,6vw,4.6rem)] sm:tracking-[0.02em]">
+            RT & ADDS
+          </span>
         </Link>
 
-        <nav className="relative z-30 flex w-full max-w-[690px] flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-full bg-[#1a3a4f] px-4 py-2 sm:gap-x-8 sm:px-10">
+        <nav className="relative z-30 flex w-full max-w-[690px] flex-wrap items-center justify-center gap-x-3 gap-y-2 rounded-full bg-[#1a3a4f] px-3 py-2 sm:gap-x-8 sm:px-10">
           {navLinks.map((link) => (
             <Link
               key={link.label}
@@ -109,10 +132,7 @@ export default function SignArtHeader() {
             )}
           </div>
 
-          <Link
-            to="/contact"
-            className={getNavClassName("/contact")}
-          >
+          <Link to="/contact" className={getNavClassName("/contact")}>
             Contact us
           </Link>
         </nav>
