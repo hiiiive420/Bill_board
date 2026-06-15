@@ -65,23 +65,23 @@ export default function SignArtHeader() {
         <Link
           to="/"
           className="flex w-full items-center justify-center whitespace-nowrap text-[#123f55]"
-          aria-label="SignArt Adds home"
+          aria-label="SignArt & Adds home"
         >
-          <span className="font-['Arial_Rounded_MT_Bold'] text-[clamp(1.55rem,8.5vw,2.4rem)] leading-none tracking-[0.01em] sm:text-[clamp(2.6rem,6vw,4.6rem)] sm:tracking-[0.02em]">
-            SIGN
+          <span className="font-['Arial_Rounded_MT_Bold'] text-[clamp(1.55rem,8.5vw,2.4rem)] leading-none tracking-[0.035em] sm:text-[clamp(2.6rem,6vw,4.6rem)] sm:tracking-[0.075em]">
+            Sign
           </span>
           <img
             src={brandMark}
             alt=""
-            className="mx-[clamp(1px,0.4vw,5px)] h-[clamp(1.5rem,8vw,2.25rem)] w-auto shrink-0 object-contain sm:h-[clamp(2.5rem,5.7vw,4.35rem)]"
+            className="mx-[clamp(3px,0.8vw,10px)] h-[clamp(1.5rem,8vw,2.25rem)] w-auto shrink-0 object-contain sm:h-[clamp(2.5rem,5.7vw,4.35rem)]"
             aria-hidden="true"
           />
-          <span className="font-['Arial_Rounded_MT_Bold'] text-[clamp(1.55rem,8.5vw,2.4rem)] leading-none tracking-[0.01em] sm:text-[clamp(2.6rem,6vw,4.6rem)] sm:tracking-[0.02em]">
-            RT & ADDS
+          <span className="font-['Arial_Rounded_MT_Bold'] text-[clamp(1.55rem,8.5vw,2.4rem)] leading-none tracking-[0.035em] sm:text-[clamp(2.6rem,6vw,4.6rem)] sm:tracking-[0.075em]">
+            rt & Adds
           </span>
         </Link>
 
-        <nav className="relative z-30 flex w-full max-w-[690px] flex-wrap items-center justify-center gap-x-3 gap-y-2 rounded-full bg-[#1a3a4f] px-3 py-2 sm:gap-x-8 sm:px-10">
+        <nav className="relative z-30 flex w-full max-w-[615px] flex-wrap items-center justify-center gap-x-3 gap-y-2 rounded-full bg-[#1a3a4f] px-3 py-2 sm:gap-x-8 sm:px-10">
           {navLinks.map((link) => (
             <Link
               key={link.label}

@@ -10,13 +10,13 @@ const initialForm = {
   company: "",
   campaignGoal: "Brand awareness",
   location: "",
-  budget: "Rs. 1M",
+  budget: "Rs. 1.5M",
   timeline: "1 Year",
   message: "",
 };
 
 const goals = ["Brand awareness", "Product launch", "Store visits", "Event promotion", "Hiring campaign"];
-const budgets = ["Rs. 1M", "Rs. 2.5M", "Rs. 5M+"];
+const budgets = ["Rs. 1.5M", "Rs. 2.5M", "Rs. 5M+"];
 const timelines = ["1 Year", "2 Years", "3 Years", "More than 3 Years"];
 
 const validateForm = (formData) => {
