@@ -132,7 +132,7 @@ return (
             <div className="relative rounded-[28px] bg-[#184074] p-6 text-white shadow-[0_24px_60px_rgba(24,64,116,.18)] sm:p-8 lg:sticky lg:top-6">
               <div className="absolute right-0 top-0 h-32 w-32 rounded-bl-[90px] bg-[#2092D1]/25" />
               <p className="relative mb-3 text-sm font-black uppercase tracking-[8px] text-[#7ec8f7] sm:text-base">
-                Billboard, Hoarding & Outdoor Advertising Sri Lanka
+                CONTACT SIGN ART
               </p>
               <h1 className="relative text-[clamp(2.7rem,6vw,4.8rem)] font-black leading-[.92] text-white">
                 Tell Us What You Need Seen
