@@ -5,7 +5,7 @@ export default function OrganizationSchema() {
   name: "SignArt",
   url: "https://signart.lk",
   logo: "https://signart.lk/logo.png",
-  image: "https://signart.lk/logo.png"
+  image: "https://signart.lk/logo.png",
   telephone: "+94775788907",
   email: "signartsadds@gmail.com",
   description:
