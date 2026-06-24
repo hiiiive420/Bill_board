@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -11,13 +12,84 @@ const serviceEntries = [
   ["campaign-activation", services["campaign-activation"]],
 ];
 
+const seoData = {
+  billboards: {
+    title:
+      "Billboard Advertising Sri Lanka | Billboard Booking & Hoarding Advertising | SignArt",
+    description:
+      "Book premium billboards and hoarding advertising locations across Sri Lanka. SignArt helps brands maximize outdoor visibility with strategic billboard placements.",
+    canonical: "https://signart.lk/services/billboards",
+  },
+
+  "media-formats": {
+    title:
+      "Outdoor Media Formats Sri Lanka | Billboard, Hoarding & OOH Advertising",
+    description:
+      "Explore billboard advertising, hoarding boards, digital displays, and outdoor media formats available across Sri Lanka.",
+    canonical: "https://signart.lk/services/media-formats",
+  },
+
+  "campaign-activation": {
+    title:
+      "Outdoor Campaign Activation Sri Lanka | Media Placement & Brand Visibility",
+    description:
+      "Launch outdoor advertising campaigns with media planning, placement, activation, and execution support across Sri Lanka.",
+    canonical: "https://signart.lk/services/campaign-activation",
+  },
+};
+
 export default function Services() {
   const { slug } = useParams();
   const activeSlug = serviceEntries.some(([itemSlug]) => itemSlug === slug) ? slug : "billboards";
   const active = services[activeSlug];
+  const seo = seoData[activeSlug];
+  const faqSchema =
+  active.faq && active.faq.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: active.faq.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      }
+    : null;
   const isBillboards = activeSlug === "billboards";
 
-  return (
+return (
+  <>
+    <Helmet>
+      <title>{seo.title}</title>
+
+      <meta
+        name="description"
+        content={seo.description}
+      />
+
+      <meta
+        name="keywords"
+        content="billboard advertising sri lanka, billboard booking sri lanka, hoarding advertising sri lanka, outdoor advertising sri lanka, outdoor campaign sri lanka"
+      />
+
+      <link
+        rel="canonical"
+        href={seo.canonical}
+      />
+
+      {faqSchema && (
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify(faqSchema),
+    }}
+  />
+)}
+    </Helmet>
+
     <div className="min-h-screen overflow-hidden bg-white text-[#184074]">
       <Navbar />
 
@@ -27,13 +99,13 @@ export default function Services() {
           <div className="relative mx-auto grid max-w-[1240px] gap-10 lg:grid-cols-[.86fr_1.14fr] lg:items-center">
             <div className="service-fade">
               <p className="mb-3 text-sm font-black uppercase tracking-[8px] text-[#2092D1]">
-                Services
+                Billboard, Hoarding & Outdoor Advertising Services
               </p>
               <h1 className="text-[clamp(3.1rem,8vw,6.2rem)] font-black leading-[.9]">
                 Outdoor Media Built For Results
               </h1>
               <p className="mt-6 max-w-[610px] text-base font-semibold leading-8 text-[#52677d]">
-                Pick a service to see how we help your brand move from campaign idea to street-level attention.
+                Explore billboard advertising, hoarding campaigns, media placement, and outdoor advertising services designed to maximize brand visibility across Sri Lanka.
               </p>
 
               
@@ -44,7 +116,7 @@ export default function Services() {
               <div className="absolute inset-0 rounded-[36px] bg-[#184074] shadow-[0_28px_70px_rgba(24,64,116,.22)]" />
               <img
                 src={active.image}
-                alt={active.title}
+                alt={`${active.title} billboard advertising service Sri Lanka`}
                 className="absolute inset-4 h-[calc(100%-32px)] w-[calc(100%-32px)] rounded-[26px] object-cover opacity-80 mix-blend-screen"
               />
               <div className="absolute bottom-6 left-6 right-6 rounded-[18px] bg-white/95 p-5 shadow-[0_18px_40px_rgba(0,0,0,.12)] backdrop-blur">
@@ -154,5 +226,6 @@ export default function Services() {
 
       <Footer />
     </div>
+    </>
   );
 }

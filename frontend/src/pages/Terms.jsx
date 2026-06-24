@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -10,6 +11,21 @@ const terms = [
 
 export default function Terms() {
   return (
+    <>
+    <Helmet>
+  <title>Terms & Conditions | SignArt</title>
+
+  <meta
+    name="description"
+    content="Review SignArt's terms and conditions for billboard advertising, outdoor advertising services, campaign bookings, and website usage."
+  />
+
+  <link
+    rel="canonical"
+    href="https://signart.lk/terms-and-conditions"
+  />
+</Helmet>
+
     <div className="min-h-screen bg-white text-[#184074]">
       <Navbar />
       <main className="px-4 py-16 sm:py-20">
@@ -28,5 +44,6 @@ export default function Terms() {
       </main>
       <Footer />
     </div>
+    </>
   );
 }

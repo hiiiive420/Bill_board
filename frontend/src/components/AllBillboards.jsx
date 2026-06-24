@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import API from "../api/axios";
@@ -5,27 +6,51 @@ import BillboardCard from "./BillboardCard";
 import BillboardDetailsModal from "./BillboardDetailsModal";
 
 const billboardFaqs = [
-  {
-    question: "How do I check billboard availability?",
-    answer:
-      "Choose a billboard from the grid and send the inquiry through WhatsApp. Our team will confirm availability, pricing, and booking details for that location.",
-  },
-  {
-    question: "Can I book more than one billboard for a campaign?",
-    answer:
-      "Yes. You can shortlist multiple locations and share them with us so we can help plan coverage, campaign duration, and the best placement mix.",
-  },
-  {
-    question: "Do you help with billboard artwork sizes?",
-    answer:
-      "Yes. Once the selected billboard size is confirmed, we can guide the artwork dimensions and help prepare campaign-ready creative.",
-  },
-  {
-    question: "How long should a billboard campaign run?",
-    answer:
-      "Most outdoor campaigns work best with repeated exposure over several weeks. The ideal duration depends on your campaign goal, area, and budget.",
-  },
+{
+  question: "How much does billboard advertising cost in Sri Lanka?",
+  answer:
+  "Billboard advertising costs in Sri Lanka depend on the location, traffic volume, billboard size, visibility, and campaign duration. Premium locations in Colombo and other high-traffic areas typically command higher rates due to increased audience exposure.",
+},
+{
+question: "How do I book a billboard in Sri Lanka?",
+answer:
+"You can browse available billboard locations on SignArt, select your preferred location, and submit an inquiry. Our team will confirm availability, pricing, campaign duration, and booking requirements.",
+},
+{
+question: "What are the best locations for billboard advertising in Sri Lanka?",
+answer:
+"Popular billboard advertising locations include Colombo, Dehiwala, Negombo, Kandy, Galle, and major highway routes. The best location depends on your target audience, campaign goals, and budget.",
+},
+{
+question: "What is the difference between billboard advertising and hoarding advertising?",
+answer:
+"In Sri Lanka, billboard advertising and hoarding advertising are often used interchangeably. Both refer to large-format outdoor advertising displays designed to maximize brand visibility and audience reach.",
+},
+{
+question: "How long should a billboard advertising campaign run?",
+answer:
+"Most billboard campaigns perform best when they run for several weeks or months. Longer campaign durations improve brand recall, audience reach, and advertising effectiveness.",
+},
+{
+question: "Can I advertise on multiple billboards at the same time?",
+answer:
+"Yes. Many brands use multiple billboard locations across Sri Lanka to increase reach, improve campaign visibility, and target audiences in different regions simultaneously.",
+},
 ];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: billboardFaqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
 
 export default function AllBillboards({ preview = false }) {
   const [billboards, setBillboards] = useState([]);
@@ -80,6 +105,14 @@ export default function AllBillboards({ preview = false }) {
 
   return (
     <section id="billboards" className="scroll-mt-6 flex flex-col items-center bg-white px-4 py-14 sm:py-16">
+      <Helmet>
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify(faqSchema),
+    }}
+  />
+</Helmet>
       <h2 className="mb-5 text-center text-[clamp(1.75rem,5vw,2.25rem)] font-black leading-none text-[#184074]">
         Stay In Their <span className="text-[#2092D1]">MINDS</span>
       </h2>

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -10,6 +11,20 @@ const items = [
 
 export default function Policy() {
   return (
+    <>
+    <Helmet>
+  <title>Privacy Policy | SignArt</title>
+
+  <meta
+    name="description"
+    content="Read the SignArt Privacy Policy and learn how we collect, use, and protect information submitted through our website and campaign inquiry forms."
+  />
+
+  <link
+    rel="canonical"
+    href="https://signart.lk/policy"
+  />
+</Helmet>
     <div className="min-h-screen bg-white text-[#184074]">
       <Navbar />
       <main className="px-4 py-16 sm:py-20">
@@ -28,5 +43,6 @@ export default function Policy() {
       </main>
       <Footer />
     </div>
+    </>
   );
 }

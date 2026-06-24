@@ -18,6 +18,28 @@ export const services = {
       ["Ready", "Campaign locations"],
     ],
     bullets: ["Browse available billboard locations", "Filter by location, name, or size", "Ask for pricing directly"],
+    faq: [
+  {
+    question: "How much does billboard advertising cost in Sri Lanka?",
+    answer:
+      "Billboard advertising costs in Sri Lanka depend on the location, visibility, campaign duration, and billboard format. Premium Colombo locations generally have higher demand and reach."
+  },
+  {
+    question: "How do I book a billboard in Sri Lanka?",
+    answer:
+      "You can contact SignArt with your preferred location, campaign duration, and advertising goals. Our team will help identify available billboard locations and provide pricing details."
+  },
+  {
+    question: "What are the best billboard locations in Sri Lanka?",
+    answer:
+      "The best billboard locations depend on your target audience. Colombo, Dehiwala, Negombo, Kandy, and major highway routes are commonly chosen for high visibility."
+  },
+  {
+    question: "What is the difference between billboard advertising and hoarding advertising?",
+    answer:
+      "Billboard advertising and hoarding advertising are often used interchangeably in Sri Lanka. Both refer to large outdoor advertising displays designed to maximize brand visibility."
+  }
+]
   },
   "media-formats": {
     label: "Media Formats",
@@ -32,6 +54,24 @@ export const services = {
       ["Premium", "High-impact roads"],
     ],
     bullets: ["Digital and static billboard options", "Location-based format guidance", "Creative sizing support"],
+
+    faq: [
+  {
+    question: "What outdoor advertising formats are available in Sri Lanka?",
+    answer:
+      "Outdoor advertising formats include static billboards, digital billboards, roadside hoardings, transit advertising, and large-format branding solutions."
+  },
+  {
+    question: "Are digital billboards better than traditional billboards?",
+    answer:
+      "Digital billboards offer flexible content updates and multiple advertisement rotations, while traditional billboards provide continuous brand exposure."
+  },
+  {
+    question: "How do I choose the right billboard format?",
+    answer:
+      "The ideal billboard format depends on campaign objectives, target audience, location, and budget."
+  }
+]
   },
   "audience-reach": {
     label: "Audience Reach",
@@ -74,6 +114,24 @@ export const services = {
       ["Launch", "Campaign ready"],
     ],
     bullets: ["Campaign scheduling", "Placement coordination", "Launch support"],
+
+    faq: [
+  {
+    question: "What is outdoor campaign activation?",
+    answer:
+      "Outdoor campaign activation includes planning, booking, coordinating, and launching billboard advertising campaigns across selected locations."
+  },
+  {
+    question: "Can SignArt manage the entire billboard campaign process?",
+    answer:
+      "Yes. SignArt can assist with location selection, media planning, creative support, billboard booking, and campaign activation."
+  },
+  {
+    question: "How long does it take to launch a billboard campaign?",
+    answer:
+      "Campaign timelines vary based on billboard availability, creative approvals, and campaign requirements."
+  }
+]
   },
   "case-studies": {
     label: "Case Studies",

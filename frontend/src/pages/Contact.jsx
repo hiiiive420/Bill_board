@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -99,7 +100,29 @@ export default function Contact() {
     }
   };
 
-  return (
+return (
+  <>
+    <Helmet>
+      <title>
+        Contact SignArt | Billboard Advertising & Outdoor Advertising Sri Lanka
+      </title>
+
+      <meta
+        name="description"
+        content="Contact SignArt for billboard advertising, hoarding campaigns, outdoor advertising, media placement, and campaign activation services across Sri Lanka."
+      />
+
+      <meta
+        name="keywords"
+        content="contact signart, billboard advertising sri lanka, billboard booking sri lanka, hoarding advertising sri lanka, outdoor advertising sri lanka"
+      />
+
+      <link
+        rel="canonical"
+        href="https://signart.lk/contact"
+      />
+    </Helmet>
+
     <div className="min-h-screen overflow-hidden bg-white text-[#184074]">
       <Navbar />
 
@@ -109,13 +132,13 @@ export default function Contact() {
             <div className="relative rounded-[28px] bg-[#184074] p-6 text-white shadow-[0_24px_60px_rgba(24,64,116,.18)] sm:p-8 lg:sticky lg:top-6">
               <div className="absolute right-0 top-0 h-32 w-32 rounded-bl-[90px] bg-[#2092D1]/25" />
               <p className="relative mb-3 text-sm font-black uppercase tracking-[8px] text-[#7ec8f7] sm:text-base">
-                Contact Sign Art
+                Billboard, Hoarding & Outdoor Advertising Sri Lanka
               </p>
               <h1 className="relative text-[clamp(2.7rem,6vw,4.8rem)] font-black leading-[.92] text-white">
                 Tell Us What You Need Seen
               </h1>
               <p className="relative mt-5 text-sm font-semibold leading-7 text-white/75 sm:text-base">
-                Share your campaign goal, location, budget, and timing. We will help you choose the right billboard space and creative direction.
+                Share your campaign goals and preferred locations. Our team helps brands secure premium billboard placements, hoarding locations, and outdoor advertising opportunities across Sri Lanka.
               </p>
 
               <div className="relative mt-7 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
@@ -136,7 +159,7 @@ export default function Contact() {
                 <div className="mt-4 grid gap-2 text-sm font-bold text-[#52677d]">
                   <p>Email: signartsadds@gmail.com</p>
                   <p>Phone: +94 77 578 8907</p>
-                  <p>Location: Colombo, Sri Lanka</p>
+                  <p>Location: Dehiwala, Colombo, Sri Lanka</p>
                 </div>
               </div>
             </div>
@@ -211,6 +234,7 @@ export default function Contact() {
 
       <Footer />
     </div>
+    </>
   );
 }
 

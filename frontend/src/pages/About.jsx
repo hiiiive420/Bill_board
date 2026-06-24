@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CountUpValue from "../components/CountUpValue";
@@ -65,7 +66,29 @@ const moments = [
 
 export default function About() {
   return (
-    <div className="min-h-screen overflow-hidden bg-white text-[#184074]">
+    <>
+      <Helmet>
+        <title>
+          About SignArt | Billboard & Hoarding Advertising Company Sri Lanka
+        </title>
+
+        <meta
+          name="description"
+          content="Learn about SignArt, a Sri Lankan outdoor advertising company specializing in billboard advertising, hoarding campaigns, media placement, and islandwide brand visibility solutions."
+        />
+
+        <meta
+          name="keywords"
+          content="about signart, billboard advertising company sri lanka, hoarding advertising sri lanka, outdoor advertising company sri lanka, media placement sri lanka"
+        />
+
+        <link
+          rel="canonical"
+          href="https://signart.lk/about"
+        />
+      </Helmet>
+
+      <div className="min-h-screen overflow-hidden bg-white text-[#184074]">
       <Navbar />
 
       <main>
@@ -73,13 +96,13 @@ export default function About() {
           <div className="mx-auto grid w-full max-w-[1324px] items-center gap-10 lg:grid-cols-[.92fr_1.08fr]">
             <div className="relative z-10 text-center lg:text-left">
               <p className="mb-3 text-sm font-black uppercase tracking-[8px] text-[#2092D1] sm:text-base">
-                About Sign Art
+                Outdoor Advertising & Hoarding Experts
               </p>
               <h1 className="text-[clamp(3.2rem,9vw,6.8rem)] font-black leading-[.9] text-[#184074]">
                 We Make Brands Impossible To Miss
               </h1>
               <p className="mx-auto mt-6 max-w-[620px] text-base font-semibold leading-8 text-[#52677d] lg:mx-0">
-                We connect ambitious brands with high-impact billboard spaces, memorable outdoor creative, and a booking experience that feels clear from the first idea to the live campaign.
+                SignArt is a Sri Lankan outdoor advertising company helping brands reach audiences through billboard advertising, hoarding campaigns, media placement, and islandwide outdoor advertising solutions.
               </p>
 
               <div className="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
@@ -113,7 +136,7 @@ export default function About() {
                   </div>
 
                   <div className="absolute left-6 top-20 w-[46%] rotate-[-5deg] overflow-hidden rounded-[8px] border-[6px] border-white bg-[#D9D9D9] shadow-[0_18px_35px_rgba(24,64,116,.2)]">
-                    <img src={ad4} alt="Campaign panel" className="h-[150px] w-full object-cover sm:h-[190px]" />
+                    <img src={ad4} alt="Billboard advertising campaign in Colombo Sri Lanka" className="h-[150px] w-full object-cover sm:h-[190px]" />
                     <div className="bg-[#184074] px-4 py-3 text-white">
                       <p className="text-xl font-black leading-none">City Launch</p>
                       <p className="mt-1 text-xs font-bold text-white/70">Colombo / Digital</p>
@@ -121,7 +144,7 @@ export default function About() {
                   </div>
 
                   <div className="absolute right-5 top-24 w-[43%] rotate-[5deg] overflow-hidden rounded-[8px] border-[6px] border-white bg-[#D9D9D9] shadow-[0_18px_35px_rgba(24,64,116,.18)]">
-                    <img src={ad5} alt="Audience panel" className="h-[135px] w-full object-cover sm:h-[175px]" />
+                    <img src={ad5} alt="Outdoor advertising audience reach campaign" className="h-[135px] w-full object-cover sm:h-[175px]" />
                     <div className="bg-[#2092D1] px-4 py-3 text-white">
                       <p className="text-xl font-black leading-none">High Recall</p>
                       <p className="mt-1 text-xs font-bold text-white/75">Peak-hour visibility</p>
@@ -370,7 +393,7 @@ export default function About() {
                   <div className="relative h-[230px] overflow-hidden">
                     <img
                       src={moment.image}
-                      alt={moment.title}
+                      alt={`${moment.title} outdoor advertising campaign Sri Lanka`}
                       className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#184074]/70 via-transparent to-transparent opacity-80" />
@@ -391,5 +414,6 @@ export default function About() {
 
       <Footer />
     </div>
+    </>
   );
 }
