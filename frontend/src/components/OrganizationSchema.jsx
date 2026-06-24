@@ -12,6 +12,8 @@ export default function OrganizationSchema() {
     telephone: "+94775788907",
     email: "signartsadds@gmail.com",
 
+    priceRange: "From LKR 1,500,000",
+
     description:
       "Billboard advertising, hoarding advertising, outdoor advertising, media placement and campaign activation services across Sri Lanka.",
 
@@ -28,7 +30,7 @@ export default function OrganizationSchema() {
     },
 
     sameAs: [
-      "https://www.instagram.com/signart.lk/",
+      "https://www.instagram.com/sign_arts_adds",
       "https://web.facebook.com/Signartads",
       "https://api.whatsapp.com/send?phone=94775788907"
     ],
