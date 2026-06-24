@@ -28,7 +28,9 @@ export default function OrganizationSchema() {
     },
 
     sameAs: [
-      "https://www.instagram.com/signart.lk/"
+      "https://www.instagram.com/signart.lk/",
+      "https://web.facebook.com/Signartads",
+      "https://api.whatsapp.com/send?phone=94775788907"
     ],
   };
 
