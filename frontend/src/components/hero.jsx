@@ -6,11 +6,12 @@ import heroVideo from "../assets/extreme_hero.webm";
 import billboardAdImage1 from "../assets/Apiit.webp";
 import billboardAdImage2 from "../assets/premiumsofa.webp";
 import billboardAdImage3 from "../assets/star_gold_full_cream_milk.webp";
+import billboardAdImage4 from "../assets/ECU.webp";
 
 const getIsMobile = () =>
   typeof window !== "undefined" && window.matchMedia("(max-width: 639px)").matches;
 
-const billboardAds = [billboardAdImage1, billboardAdImage2, billboardAdImage3];
+const billboardAds = [billboardAdImage1, billboardAdImage2, billboardAdImage3, billboardAdImage4];
 
 // Fine-tune this wrapper if the whole distorted ad area needs moving/resizing.
 const billboardAdBox = {
