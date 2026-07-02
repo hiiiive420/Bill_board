@@ -20,6 +20,12 @@
   }
 }
 
+@font-face {
+  font-family: "Aptos";
+  src: url("./assets/fonts/Aptos-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+}
+
 @layer utilities {
   .about-float {
     animation: aboutFloat 7s ease-in-out infinite;
