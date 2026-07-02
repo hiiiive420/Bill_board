@@ -1,4 +1,4 @@
-import brandMark from "../assets/a.webp";
+import brandMark from "../assets/SignArtLogo.webp";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -28,8 +28,8 @@ export default function SignArtHeader() {
   };
 
   return (
-    <header className="bg-white px-3 pb-5 pt-5 sm:px-4 sm:pb-7 sm:pt-8">
-      <div className="mx-auto flex w-full max-w-[1324px] flex-col items-center gap-4 sm:gap-6">
+    <header className="bg-white px-3 pb-5  sm:px-4 sm:pb-7 ">
+      <div className="mx-auto flex w-full max-w-[1324px] flex-col items-center ">
         {/*
           Previous header logo design:
 
@@ -62,24 +62,35 @@ export default function SignArtHeader() {
           </Link>
         */}
 
-        <Link
-          to="/"
-          className="flex w-full items-center justify-center whitespace-nowrap text-[#123f55]"
-          aria-label="SignArt & Adds home"
-        >
-          <span className="font-['Arial_Rounded_MT_Bold'] text-[clamp(1.55rem,8.5vw,2.4rem)] leading-none tracking-[0.035em] sm:text-[clamp(2.6rem,6vw,4.6rem)] sm:tracking-[0.075em]">
-            Sign
-          </span>
-          <img
-            src={brandMark}
-            alt=""
-            className="mx-[clamp(3px,0.8vw,10px)] h-[clamp(1.5rem,8vw,2.25rem)] w-auto shrink-0 object-contain sm:h-[clamp(2.5rem,5.7vw,4.35rem)]"
-            aria-hidden="true"
-          />
-          <span className="font-['Arial_Rounded_MT_Bold'] text-[clamp(1.55rem,8.5vw,2.4rem)] leading-none tracking-[0.035em] sm:text-[clamp(2.6rem,6vw,4.6rem)] sm:tracking-[0.075em]">
-            rt & Adds
-          </span>
-        </Link>
+<Link
+  to="/"
+  aria-label="SignArt & ADDS"
+  className="flex items-center justify-center"
+>
+  <img
+    src={brandMark}
+    alt="SignArt Logo"
+    className="
+w-[94px] h-[94px]
+sm:w-[78px] sm:h-[78px]
+md:w-[132px] md:h-[132px]
+object-contain
+shrink-0
+"
+  />
+
+  <h1
+    className="leading-none"
+    style={{
+      color: "#1A3A4F",
+      fontFamily: "Aptos, sans-serif",
+      fontWeight: 800,
+      fontSize: "clamp(2.3rem,6vw,78px)",
+    }}
+  >
+    SignArt & ADDS
+  </h1>
+</Link>
 
         <nav className="relative z-30 flex w-full max-w-[615px] flex-wrap items-center justify-center gap-x-3 gap-y-2 rounded-full bg-[#1a3a4f] px-3 py-2 sm:gap-x-8 sm:px-10">
           {navLinks.map((link) => (
